@@ -1,0 +1,7 @@
+{
+  "name": "@yflow/piece-amazon-sqs",
+  "version": "0.1.0",
+  "dependencies": {
+    "@aws-sdk/client-sqs": "^3.806.0"
+  }
+}

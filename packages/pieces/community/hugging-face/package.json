@@ -1,0 +1,7 @@
+{
+  "name": "@yflow/piece-hugging-face",
+  "version": "0.1.0",
+  "dependencies": {
+    "@huggingface/inference": "4.7.1"
+  }
+}

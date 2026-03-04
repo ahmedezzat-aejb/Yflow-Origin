@@ -1,0 +1,7 @@
+{
+  "name": "@yflow/piece-snowflake",
+  "version": "0.1.0",
+  "dependencies": {
+    "snowflake-sdk": "1.9.3"
+  }
+}

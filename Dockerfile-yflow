@@ -1,0 +1,104 @@
+# YFlow YflowDockerfile - Simplified Build
+FROM node:20.19-bullseye-slim as base
+
+# Install system dependencies
+RUN apt-get update && \
+    apt-get install -y \
+    curl \
+    unzip \
+    nginx \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Bun
+RUN export ARCH=$(uname -m) && \
+    if [ "$ARCH" = "x86_64" ]; then \
+        curl -fSL https://github.com/oven-sh/bun/releases/download/bun-v1.3.1/bun-linux-x64-baseline.zip -o bun.zip; \
+    else \
+        curl -fSL https://github.com/oven-sh/bun/releases/download/bun-v1.3.1/bun-linux-aarch64-baseline.zip -o bun.zip; \
+    fi && \
+    unzip bun.zip && \
+    mv bun-*/bun /usr/local/bin/bun && \
+    chmod +x /usr/local/bin/bun && \
+    rm -rf bun.zip bun-*
+
+# Install global packages with retry logic
+RUN for i in 1 2 3; do \
+        npm install -g --no-fund --no-audit \
+            node-gyp \
+            npm@9.9.3 \
+            pm2@6.0.10 \
+            typescript@4.9.4 && \
+        break || \
+        sleep 10; \
+    done
+
+# Set working directory
+WORKDIR /usr/src/app
+
+# Copy package files
+COPY package.json bun.lock ./
+COPY packages ./packages
+
+# Install dependencies
+RUN bun install --frozen-lockfile
+
+# Build packages
+RUN bun run build:react-ui && \
+    bun run build:server-api
+
+# Production stage
+FROM node:20.19-bullseye-slim as production
+
+# Install runtime dependencies
+RUN apt-get update && \
+    apt-get install -y \
+    nginx \
+    curl \
+    unzip \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Bun
+RUN export ARCH=$(uname -m) && \
+    if [ "$ARCH" = "x86_64" ]; then \
+        curl -fSL https://github.com/oven-sh/bun/releases/download/bun-v1.3.1/bun-linux-x64-baseline.zip -o bun.zip; \
+    else \
+        curl -fSL https://github.com/oven-sh/bun/releases/download/bun-v1.3.1/bun-linux-aarch64-baseline.zip -o bun.zip; \
+    fi && \
+    unzip bun.zip && \
+    mv bun-*/bun /usr/local/bin/bun && \
+    chmod +x /usr/local/bin/bun && \
+    rm -rf bun.zip bun-* && \
+    bun --version
+
+# Install PM2
+RUN npm install -g pm2@6.0.10
+
+# Set working directory
+WORKDIR /usr/src/app
+
+# Copy built application
+COPY --from=base /usr/src/app/packages/server/api/dist ./packages/server/api/dist
+COPY --from=base /usr/src/app/packages/server/api/node_modules ./packages/server/api/node_modules
+COPY --from=base /usr/src/app/packages/server/api/package.json ./packages/server/api/
+COPY --from=base /usr/src/app/packages/shared/dist ./packages/shared/dist
+COPY --from=base /usr/src/app/packages/shared/node_modules ./packages/shared/node_modules
+COPY --from=base /usr/src/app/packages/shared/package.json ./packages/shared/
+COPY --from=base /usr/src/app/packages/react-ui/dist ./packages/react-ui/dist
+
+# Copy configuration files
+COPY .env.example ./.env
+COPY nginx.react.conf /etc/nginx/conf.d/default.conf
+COPY docker-entrypoint.sh /docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh
+
+# Copy frontend build
+COPY --from=base /usr/src/app/packages/react-ui/dist /usr/share/nginx/html
+
+# Create cache directory
+RUN mkdir -p /usr/src/app/cache
+
+# Expose ports
+EXPOSE 80 443 3000
+
+# Start script
+ENTRYPOINT ["/docker-entrypoint.sh"]

@@ -1,0 +1,4 @@
+AP_API_KEY=your_api_key_here_64_chars_hex
+AP_POSTGRES_PASSWORD=your_postgres_password_here_32_chars_hex
+AP_JWT_SECRET=your_jwt_secret_here_32_chars_hex
+AP_ENCRYPTION_KEY=your_encryption_key_here_16_chars_hex

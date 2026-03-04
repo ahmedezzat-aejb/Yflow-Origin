@@ -1,0 +1,7 @@
+{
+  "name": "@yflow/piece-flowise",
+  "version": "0.1.1",
+  "devDependencies": {
+    "@types/is-url": "^1.2.32"
+  }
+}

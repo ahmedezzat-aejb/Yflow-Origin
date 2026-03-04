@@ -1,0 +1,7 @@
+{
+  "name": "@yflow/piece-customer-io",
+  "version": "0.3.1",
+  "dependencies": {
+    "buffer": "6.0.3"
+  }
+}

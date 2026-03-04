@@ -1,0 +1,469 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "yflow.fullname" . }}
+  labels:
+    {{- include "yflow.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "yflow.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "yflow.labels" . | nindent 8 }}
+        {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "yflow.serviceAccountName" . }}
+      {{- with .Values.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          {{- with .Values.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.container.port }}
+              protocol: TCP
+          env:
+            # Core Yflowconfiguration
+            {{- if .Values.yflow.frontendUrl }}
+            - name: AP_FRONTEND_URL
+              value: {{ .Values.yflow.frontendUrl | quote }}
+            {{- end }}
+            {{- if .Values.yflow.apiKey }}
+            - name: AP_API_KEY
+              value: {{ .Values.yflow.apiKey | quote }}
+            {{- end }}
+            {{- if .Values.yflow.clientRealIpHeader }}
+            - name: AP_CLIENT_REAL_IP_HEADER
+              value: {{ .Values.yflow.clientRealIpHeader | quote }}
+            {{- end }}
+            {{- if .Values.yflow.configPath }}
+            - name: AP_CONFIG_PATH
+              value: {{ .Values.yflow.configPath | quote }}
+            {{- end }}
+            {{- if .Values.yflow.devPieces }}
+            - name: AP_DEV_PIECES
+              value: {{ .Values.yflow.devPieces | quote }}
+            {{- end }}
+            {{- if .Values.yflow.internalUrl }}
+            - name: AP_INTERNAL_URL
+              value: {{ .Values.yflow.internalUrl | quote }}
+            {{- end }}
+            {{- if .Values.yflow.maxConcurrentJobsPerProject }}
+            - name: AP_MAX_CONCURRENT_JOBS_PER_PROJECT
+              value: {{ .Values.yflow.maxConcurrentJobsPerProject | quote }}
+            {{- end }}
+            {{- if .Values.yflow.perplexityBaseUrl }}
+            - name: AP_PERPLEXITY_BASE_URL
+              value: {{ .Values.yflow.perplexityBaseUrl | quote }}
+            {{- end }}
+            {{- if .Values.yflow.piecesSyncMode }}
+            - name: AP_PIECES_SYNC_MODE
+              value: {{ .Values.yflow.piecesSyncMode | quote }}
+            {{- end }}
+            {{- if .Values.yflow.featurebaseApiKey }}
+            - name: AP_FEATUREBASE_API_KEY
+              value: {{ .Values.yflow.featurebaseApiKey | quote }}
+            {{- end }}
+            {{- if .Values.yflow.enableFlowOnPublish }}
+            - name: AP_ENABLE_FLOW_ON_PUBLISH
+              value: {{ .Values.yflow.enableFlowOnPublish | quote }}
+            {{- end }}
+            {{- if .Values.yflow.issueArchiveDays }}
+            - name: AP_ISSUE_ARCHIVE_DAYS
+              value: {{ .Values.yflow.issueArchiveDays | quote }}
+            {{- end }}
+            {{- if .Values.yflow.pausedFlowTimeoutDays }}
+            - name: AP_PAUSED_FLOW_TIMEOUT_DAYS
+              value: {{ .Values.yflow.pausedFlowTimeoutDays | quote }}
+            {{- end }}
+            {{- if .Values.yflow.logLevel }}
+            - name: AP_LOG_LEVEL
+              value: {{ .Values.yflow.logLevel | quote }}
+            {{- end }}
+            {{- if .Values.yflow.logPretty }}
+            - name: AP_LOG_PRETTY
+              value: {{ .Values.yflow.logPretty | quote }}
+            {{- end }}
+            {{- if .Values.yflow.appWebhookSecrets }}
+            - name: AP_APP_WEBHOOK_SECRETS
+              value: {{ .Values.yflow.appWebhookSecrets | quote }}
+            {{- end }}
+            {{- if .Values.yflow.maxFileSizeMb }}
+            - name: AP_MAX_FILE_SIZE_MB
+              value: {{ .Values.yflow.maxFileSizeMb | quote }}
+            {{- end }}
+            {{- if .Values.yflow.sandboxMemoryLimit }}
+            - name: AP_SANDBOX_MEMORY_LIMIT
+              value: {{ .Values.yflow.sandboxMemoryLimit | quote }}
+            {{- end }}
+            {{- if .Values.yflow.sandboxPropagatedEnvVars }}
+            - name: AP_SANDBOX_PROPAGATED_ENV_VARS
+              value: {{ .Values.yflow.sandboxPropagatedEnvVars | quote }}
+            {{- end }}
+            {{- if .Values.yflow.piecesSource }}
+            - name: AP_PIECES_SOURCE
+              value: {{ .Values.yflow.piecesSource | quote }}
+            {{- end }}
+            {{- if .Values.yflow.apiRateLimiting.authn.enabled }}
+            - name: AP_API_RATE_LIMIT_AUTHN_ENABLED
+              value: {{ .Values.yflow.apiRateLimiting.authn.enabled | quote }}
+            {{- end }}
+            {{- if .Values.yflow.apiRateLimiting.authn.max }}
+            - name: AP_API_RATE_LIMIT_AUTHN_MAX
+              value: {{ .Values.yflow.apiRateLimiting.authn.max | quote }}
+            {{- end }}
+            {{- if .Values.yflow.apiRateLimiting.authn.window }}
+            - name: AP_API_RATE_LIMIT_AUTHN_WINDOW
+              value: {{ .Values.yflow.apiRateLimiting.authn.window | quote }}
+            {{- end }}
+            {{- if .Values.yflow.projectRateLimiter.enabled }}
+            - name: AP_PROJECT_RATE_LIMITER_ENABLED
+              value: {{ .Values.yflow.projectRateLimiter.enabled | quote }}
+            {{- end }}
+            - name: AP_ENCRYPTION_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "yflow.fullname" . }}-secrets
+                  key: encryption-key
+            - name: AP_JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "yflow.fullname" . }}-jwt-secret
+                  key: jwt-secret
+            {{- if .Values.yflow.environment }}
+            - name: AP_ENVIRONMENT
+              value: {{ .Values.yflow.environment | quote }}
+            {{- end }}
+            {{- if .Values.yflow.edition }}
+            - name: AP_EDITION
+              value: {{ .Values.yflow.edition | quote }}
+            {{- end }}
+            {{- if .Values.yflow.executionMode }}
+            - name: AP_EXECUTION_MODE
+              value: {{ .Values.yflow.executionMode | quote }}
+            {{- end }}
+            {{- if .Values.yflow.telemetryEnabled }}
+            - name: AP_TELEMETRY_ENABLED
+              value: {{ .Values.yflow.telemetryEnabled | quote }}
+            {{- end }}
+            {{- if .Values.yflow.templatesSourceUrl }}
+            - name: AP_TEMPLATES_SOURCE_URL
+              value: {{ .Values.yflow.templatesSourceUrl | quote }}
+            {{- end }}
+            {{- if .Values.yflow.flowWorkerConcurrency }}
+            - name: AP_FLOW_WORKER_CONCURRENCY
+              value: {{ .Values.yflow.flowWorkerConcurrency | quote }}
+            {{- end }}
+            {{- if .Values.yflow.scheduledWorkerConcurrency }}
+            - name: AP_SCHEDULED_WORKER_CONCURRENCY
+              value: {{ .Values.yflow.scheduledWorkerConcurrency | quote }}
+            {{- end }}
+            {{- if .Values.yflow.triggerDefaultPollInterval }}
+            - name: AP_TRIGGER_DEFAULT_POLL_INTERVAL
+              value: {{ .Values.yflow.triggerDefaultPollInterval | quote }}
+            {{- end }}
+            {{- if .Values.yflow.triggerTimeoutSeconds }}
+            - name: AP_TRIGGER_TIMEOUT_SECONDS
+              value: {{ .Values.yflow.triggerTimeoutSeconds | quote }}
+            {{- end }}
+            {{- if .Values.yflow.flowTimeoutSeconds }}
+            - name: AP_FLOW_TIMEOUT_SECONDS
+              value: {{ .Values.yflow.flowTimeoutSeconds | quote }}
+            {{- end }}
+            {{- if .Values.yflow.webhookTimeoutSeconds }}
+            - name: AP_WEBHOOK_TIMEOUT_SECONDS
+              value: {{ .Values.yflow.webhookTimeoutSeconds | quote }}
+            {{- end }}
+            {{- if .Values.yflow.executionDataRetentionDays }}
+            - name: AP_EXECUTION_DATA_RETENTION_DAYS
+              value: {{ .Values.yflow.executionDataRetentionDays | quote }}
+            {{- end }}
+            {{- if or .Values.postgresql.enabled (or .Values.postgresql.host .Values.postgresql.url) }}
+            # PostgreSQL configuration (subchart or external)
+            - name: AP_DB_TYPE
+              value: "POSTGRES"
+            {{- if .Values.postgresql.auth.database }}
+            - name: AP_POSTGRES_DATABASE
+              value: {{ .Values.postgresql.auth.database | quote }}
+            {{- end }}
+            {{- if .Values.postgresql.host }}
+            - name: AP_POSTGRES_HOST
+              value: {{ .Values.postgresql.host | quote }}
+            {{- else if .Values.postgresql.enabled }}
+            - name: AP_POSTGRES_HOST
+              value: {{ printf "%s-postgresql" (include "yflow.fullname" .) | quote }}
+            {{- end }}
+            {{- if .Values.postgresql.port }}
+            - name: AP_POSTGRES_PORT
+              value: {{ .Values.postgresql.port | quote }}
+            {{- end }}
+            {{- if .Values.postgresql.auth.username }}
+            - name: AP_POSTGRES_USERNAME
+              value: {{ .Values.postgresql.auth.username | quote }}
+            {{- end }}
+            {{- if .Values.postgresql.auth.externalSecret }}
+            - name: AP_POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.postgresql.auth.externalSecret.name | quote }}
+                  key: {{ .Values.postgresql.auth.externalSecret.key | quote }}
+            {{- else if .Values.postgresql.auth.password }}
+            - name: AP_POSTGRES_PASSWORD
+              value: {{ .Values.postgresql.auth.password | quote }}
+            {{- else if .Values.postgresql.enabled }}
+            - name: AP_POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "yflow.fullname" . }}-postgresql
+                  key: postgres-password
+            {{- end }}
+            {{- if .Values.postgresql.useSSL }}
+            - name: AP_POSTGRES_USE_SSL
+              value: {{ .Values.postgresql.useSSL | quote }}
+            {{- end }}
+            {{- if .Values.postgresql.sslCa }}
+            - name: AP_POSTGRES_SSL_CA
+              value: {{ .Values.postgresql.sslCa | quote }}
+            {{- end }}
+            {{- if .Values.postgresql.url }}
+            - name: AP_POSTGRES_URL
+              value: {{ .Values.postgresql.url | quote }}
+            {{- end }}
+            {{- else }}
+            # SQLite configuration (fallback)
+            - name: AP_DB_TYPE
+              value: "SQLITE3"
+            {{- end }}
+            {{- if or .Values.redis.enabled (or .Values.redis.host .Values.redis.url) }}
+            # Redis configuration (subchart or external)
+            {{- if .Values.redis.host }}
+            - name: AP_REDIS_HOST
+              value: {{ .Values.redis.host | quote }}
+            {{- else if .Values.redis.enabled }}
+            - name: AP_REDIS_HOST
+              value: {{ printf "%s-redis-master" (include "yflow.fullname" .) | quote }}
+            {{- end }}
+            {{- if .Values.redis.port }}
+            - name: AP_REDIS_PORT
+              value: {{ .Values.redis.port | quote }}
+            {{- end }}
+            {{- if .Values.redis.useSSL }}
+            - name: AP_REDIS_USE_SSL
+              value: {{ .Values.redis.useSSL | quote }}
+            {{- end }}
+            {{- if .Values.redis.sslCaFile }}
+            - name: AP_REDIS_SSL_CA_FILE
+              value: {{ .Values.redis.sslCaFile | quote }}
+            {{- end }}
+            {{- if .Values.redis.db }}
+            - name: AP_REDIS_DB
+              value: {{ .Values.redis.db | quote }}
+            {{- end }}
+            {{- if .Values.redis.user }}
+            - name: AP_REDIS_USER
+              value: {{ .Values.redis.user | quote }}
+            {{- end }}
+            {{- if .Values.redis.url }}
+            - name: AP_REDIS_URL
+              value: {{ .Values.redis.url | quote }}
+            {{- end }}
+            {{- if eq .Values.redis.type "sentinel" }}
+            - name: AP_REDIS_TYPE
+              value: "SENTINEL"
+            {{- else }}
+            # Default to DEFAULT for standalone Redis
+            - name: AP_REDIS_TYPE
+              value: "DEFAULT"
+            {{- end }}
+            {{- if .Values.redis.sentinel.role }}
+            - name: AP_REDIS_SENTINEL_ROLE
+              value: {{ .Values.redis.sentinel.role | quote }}
+            {{- end }}
+            {{- if .Values.redis.sentinel.hosts }}
+            - name: AP_REDIS_SENTINEL_HOSTS
+              value: {{ .Values.redis.sentinel.hosts | quote }}
+            {{- end }}
+            {{- if .Values.redis.sentinel.name }}
+            - name: AP_REDIS_SENTINEL_NAME
+              value: {{ .Values.redis.sentinel.name | quote }}
+            {{- end }}
+            {{- if .Values.redis.failedJob.retentionDays }}
+            - name: AP_REDIS_FAILED_JOB_RETENTION_DAYS
+              value: {{ .Values.redis.failedJob.retentionDays | quote }}
+            {{- end }}
+            {{- if .Values.redis.failedJob.retentionMaxCount }}
+            - name: AP_REDIS_FAILED_JOB_RETENTION_MAX_COUNT
+              value: {{ .Values.redis.failedJob.retentionMaxCount | quote }}
+            {{- end }}
+            {{- if .Values.redis.auth.externalSecret }}
+            - name: AP_REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.redis.auth.externalSecret.name | quote }}
+                  key: {{ .Values.redis.auth.externalSecret.key | quote }}
+            {{- else if .Values.redis.auth.password }}
+            - name: AP_REDIS_PASSWORD
+              value: {{ .Values.redis.auth.password | quote }}
+            {{- else if and .Values.redis.enabled .Values.redis.auth.enabled }}
+            - name: AP_REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-redis
+                  key: redis-password
+            {{- end }}
+            {{- else }}
+            # Memory queue (fallback)
+            - name: AP_REDIS_TYPE
+              value: "MEMORY"
+            {{- end }}
+            {{- if .Values.smtp.enabled }}
+            # SMTP configuration
+            {{- if .Values.smtp.host }}
+            - name: AP_SMTP_HOST
+              value: {{ .Values.smtp.host | quote }}
+            {{- end }}
+            {{- if .Values.smtp.port }}
+            - name: AP_SMTP_PORT
+              value: {{ .Values.smtp.port | quote }}
+            {{- end }}
+            {{- if .Values.smtp.username }}
+            - name: AP_SMTP_USERNAME
+              value: {{ .Values.smtp.username | quote }}
+            {{- end }}
+            {{- if .Values.smtp.password }}
+            - name: AP_SMTP_PASSWORD
+              value: {{ .Values.smtp.password | quote }}
+            {{- end }}
+            {{- if .Values.smtp.senderEmail }}
+            - name: AP_SMTP_SENDER_EMAIL
+              value: {{ .Values.smtp.senderEmail | quote }}
+            {{- end }}
+            {{- if .Values.smtp.senderName }}
+            - name: AP_SMTP_SENDER_NAME
+              value: {{ .Values.smtp.senderName | quote }}
+            {{- end }}
+            {{- end }}
+            {{- if .Values.s3.enabled }}
+            # S3 configuration
+            {{- if .Values.s3.accessKeyId }}
+            - name: AP_S3_ACCESS_KEY_ID
+              value: {{ .Values.s3.accessKeyId | quote }}
+            {{- end }}
+            {{- if .Values.s3.secretAccessKey }}
+            - name: AP_S3_SECRET_ACCESS_KEY
+              value: {{ .Values.s3.secretAccessKey | quote }}
+            {{- end }}
+            {{- if .Values.s3.bucket }}
+            - name: AP_S3_BUCKET
+              value: {{ .Values.s3.bucket | quote }}
+            {{- end }}
+            {{- if .Values.s3.endpoint }}
+            - name: AP_S3_ENDPOINT
+              value: {{ .Values.s3.endpoint | quote }}
+            {{- end }}
+            {{- if .Values.s3.region }}
+            - name: AP_S3_REGION
+              value: {{ .Values.s3.region | quote }}
+            {{- end }}
+            {{- if .Values.s3.useSignedUrls }}
+            - name: AP_S3_USE_SIGNED_URLS
+              value: {{ .Values.s3.useSignedUrls | quote }}
+            {{- end }}
+            {{- if .Values.s3.useIrsa }}
+            - name: AP_S3_USE_IRSA
+              value: {{ .Values.s3.useIrsa | quote }}
+            {{- end }}
+            {{- end }}
+            {{- if .Values.queueUi.enabled }}
+            # Queue UI configuration
+            - name: AP_QUEUE_UI_ENABLED
+              value: {{ .Values.queueUi.enabled | quote }}
+            {{- if .Values.queueUi.username }}
+            - name: AP_QUEUE_UI_USERNAME
+              value: {{ .Values.queueUi.username | quote }}
+            {{- end }}
+            {{- if .Values.queueUi.password }}
+            - name: AP_QUEUE_UI_PASSWORD
+              value: {{ .Values.queueUi.password | quote }}
+            {{- end }}
+            {{- end }}
+            {{- if .Values.yflow.engineExecutablePath }}
+            - name: AP_ENGINE_EXECUTABLE_PATH
+              value: {{ .Values.yflow.engineExecutablePath | quote }}
+            {{- end }}
+            # OpenTelemetry configuration
+            {{- if .Values.yflow.otel.enabled }}
+            - name: AP_OTEL_ENABLED
+              value: {{ .Values.yflow.otel.enabled | quote }}
+            {{- end }}
+            {{- if .Values.yflow.otel.exporterOtlpEndpoint }}
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: {{ .Values.yflow.otel.exporterOtlpEndpoint | quote }}
+            {{- end }}
+            {{- if .Values.yflow.otel.exporterOtlpHeaders }}
+            - name: OTEL_EXPORTER_OTLP_HEADERS
+              value: {{ .Values.yflow.otel.exporterOtlpHeaders | quote }}
+            {{- end }}
+          {{- with .Values.livenessProbe }}
+          livenessProbe:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.readinessProbe }}
+          readinessProbe:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          volumeMounts:
+            {{- if .Values.persistence.enabled }}
+            - name: cache
+              mountPath: {{ .Values.persistence.mountPath | quote }}
+            {{- end }}
+            {{- with .Values.volumeMounts }}
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
+      volumes:
+        {{- if .Values.persistence.enabled }}
+        - name: cache
+          persistentVolumeClaim:
+            claimName: {{ include "yflow.fullname" . }}-cache
+        {{- end }}
+        {{- with .Values.volumes }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

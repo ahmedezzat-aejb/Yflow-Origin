@@ -1,0 +1,7 @@
+{
+  "name": "@yflow/piece-metabase",
+  "version": "0.2.0",
+  "dependencies": {
+    "playwright": "1.56.0"
+  }
+}

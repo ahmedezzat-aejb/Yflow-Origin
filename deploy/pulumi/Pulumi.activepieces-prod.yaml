@@ -1,0 +1,19 @@
+encryptionsalt: v1:icXg2cmIvSc=:v1:y8+4YhdMCPPDY26J:5cNYmimH353n8sjUDDc6srvcPgb+8Q==
+config:
+  yflow:environment: "prod"
+  yflow:apEncryptionKey:  
+  yflow:apJwtSecret: 
+  yflow:deployLocalBuild: "true"
+  yflow:repoName: "yflow-prod-repo"
+  yflow:containerCpu: "512"
+  yflow:containerMemory: "1024"
+  yflow:containerInstances: "1"
+  yflow:usePostgres: "true"
+  yflow:dbInstanceClass: "db.t3.small"
+  yflow:dbIsPublic: "false"
+  yflow:dbPassword:
+    secure: v1:MXNSOcqZCp10X2PX:mU2iTrcETjdisk8FkD5yHLJYUxRei/9l
+  yflow:dbUsername: "postgres"
+  yflow:useRedis: "true"
+  yflow:redisNodeType: "cache.t3.small"
+  aws:region: "us-east-1"

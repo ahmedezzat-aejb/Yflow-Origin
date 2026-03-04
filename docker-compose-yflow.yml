@@ -1,0 +1,85 @@
+services:
+  yflow-yflow:
+    image: yflow/yflow:latest
+    container_name: yflow-yflow
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '443:443'
+    depends_on:
+      - postgres
+      - redis
+    env_file: .env
+    volumes:
+      - ./cache:/usr/src/app/cache
+      - ./ssl:/etc/ssl/certs:ro
+      - ./logs:/var/log/nginx
+    networks:
+      - yflow
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  postgres:
+    image: 'postgres:14.4'
+    container_name: yflow-postgres
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - 'POSTGRES_DB=${AP_POSTGRES_DATABASE}'
+      - 'POSTGRES_PASSWORD=${AP_POSTGRES_PASSWORD}'
+      - 'POSTGRES_USER=${AP_POSTGRES_USERNAME}'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backups:/backups
+    networks:
+      - yflow
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${AP_POSTGRES_USERNAME} -d ${AP_POSTGRES_DATABASE}"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  redis:
+    image: 'redis:7.0.7'
+    container_name: yflow-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes --requirepass ${AP_REDIS_PASSWORD:-}
+    volumes:
+      - 'redis_data:/data'
+    networks:
+      - yflow
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Nginx reverse proxy for SSL termination
+  nginx:
+    image: nginx:alpine
+    container_name: yflow-nginx
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/ssl/certs:ro
+      - ./logs/nginx:/var/log/nginx
+    depends_on:
+      - yflow-yflow
+    networks:
+      - yflow
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  yflow:
+    driver: bridge

@@ -1,0 +1,8 @@
+{
+  "name": "@yflow/piece-gmail",
+  "version": "0.10.1",
+  "dependencies": {
+    "googleapis": "129.0.0",
+    "mailparser": "3.7.5"
+  }
+}

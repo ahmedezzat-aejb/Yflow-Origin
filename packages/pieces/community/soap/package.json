@@ -1,0 +1,7 @@
+{
+  "name": "@yflow/piece-soap",
+  "version": "0.1.0",
+  "dependencies": {
+    "soap": "1.1.10"
+  }
+}

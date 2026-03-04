@@ -1,0 +1,47 @@
+import { createCustomApiCallAction } from '@yflow/pieces-common';
+import {
+  PieceAuth,
+  Property,
+  createPiece,
+} from '@yflow/pieces-framework';
+import { PieceCategory } from '@yflow/shared';
+import { askLocalAI } from './lib/actions/send-prompt';
+
+export const localaiAuth = PieceAuth.CustomAuth({
+  props: {
+    base_url: Property.ShortText({
+      displayName: 'Server URL',
+      description: 'LocalAI Instance URL',
+      required: true,
+    }),
+    access_token: Property.ShortText({
+      displayName: 'Access Token',
+      description: 'LocalAI Access Token',
+      required: false,
+    }),
+  },
+  required: true,
+});
+export const openai = createPiece({
+  displayName: 'LocalAI',
+  description:
+    'The free, Self-hosted, community-driven and local-first. Drop-in replacement for OpenAI running on consumer-grade hardware. No GPU required.',
+  minimumSupportedRelease: '0.30.0',
+  logoUrl: 'https://cdn.Yflow.com/pieces/localai.jpeg',
+  categories: [PieceCategory.ARTIFICIAL_INTELLIGENCE],
+  auth: localaiAuth,
+  actions: [
+    askLocalAI,
+    createCustomApiCallAction({
+      baseUrl: (auth) => (auth)?.props.base_url ?? '',
+      auth: localaiAuth,
+      authMapping: async (auth) => ({
+        Authorization: `Bearer ${
+          auth.props.access_token || ''
+        }`,
+      }),
+    }),
+  ],
+  authors: ["hkboujrida","kishanprmr","MoShizzle","abuaboud"],
+  triggers: [],
+});

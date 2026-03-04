@@ -1,0 +1,7 @@
+{
+  "name": "@yflow/piece-pastefy",
+  "version": "0.2.1",
+  "dependencies": {
+    "crypto-js": "4.2.0"
+  }
+}
