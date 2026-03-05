@@ -13,6 +13,17 @@
   "commitConvention": "angular",
   "contributors": [
     {
+      "login": "ahmedezzat-aejb",
+      "name": "Ahmed Ezzat",
+      "avatar_url": "https://avatars.githubusercontent.com/u/ahmedezzat-aejb?v=4",
+      "profile": "https://github.com/ahmedezzat-aejb",
+      "contributions": [
+        "projectManagement",
+        "maintenance",
+        "code"
+      ]
+    },
+    {
       "login": "ShahedAlMashni",
       "name": "ShahedAlMashni",
       "avatar_url": "https://avatars.githubusercontent.com/u/41443850?v=4",
