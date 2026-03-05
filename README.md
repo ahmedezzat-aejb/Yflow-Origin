@@ -114,22 +114,11 @@ You can easily create your own integration using our TypeScript framework. For d
 
 yflow' Community Edition is released as open source under the [MIT license](https://github.com/yflow/yflow/blob/main/LICENSE) and enterprise features are released under [Commercial License](https://github.com/yflow/yflow/blob/main/packages/ee/LICENSE)
 
-
 Read more about the feature comparison here https://www.yflow.com/docs/about/editions
 <br>
 <br>
 
-
-# 💭 Join Our Community
-
-<a href="https://discord.gg/2jUXBKDdP8" target="_blank">
-<img src="https://discordapp.com/api/guilds/966798490984382485/widget.png?style=banner3" alt="">
-</a>
-
-<br>
-<br>
-
-# 🌐 Contributions
+## 🦫 Contributors
 
 We welcome contributions big or small and in different directions. The best way to do this is to check this [document](https://www.yflow.com/docs/build-pieces/building-pieces/create-action) and we are always up to talk on [our Discord Server](https://discord.gg/2jUXBKDdP8).
 
