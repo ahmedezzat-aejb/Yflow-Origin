@@ -20,7 +20,7 @@
         "./src/*"
       ],
       "@yflow/shared": [
-        "../../packages/shared/src"
+        "../../packages/shared/src/index.ts"
       ],
       "@yflow/ee-shared": [
         "../../packages/ee/shared/src"
