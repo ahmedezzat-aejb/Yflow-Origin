@@ -15,7 +15,6 @@ export const API_BASE_URL =
     ? 'https://app.yflow.ru'
     : window.location.origin;
 export const API_URL = `${API_BASE_URL}/api`;
-Ks
 const disallowedRoutes = [
   '/v1/managed-authn/external-token',
   '/v1/authentication/sign-in',

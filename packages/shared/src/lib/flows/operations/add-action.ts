@@ -1,6 +1,6 @@
 import { TypeCompiler } from '@sinclair/typebox/compiler'
 import { isNil } from '../../common'
-import { yflowError, ErrorCode } from '../../common/yflow-error'
+import { ErrorCode, yflowError } from '../../common/activepieces-error'
 import { FlowAction, FlowActionType, LoopOnItemsAction, RouterAction, SingleActionSchema } from '../actions/action'
 import { FlowVersion } from '../flow-version'
 import { flowStructureUtil, Step } from '../util/flow-structure-util'

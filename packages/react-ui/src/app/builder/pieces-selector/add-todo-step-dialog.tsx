@@ -2,8 +2,8 @@ import { t } from 'i18next';
 import { InfoIcon } from 'lucide-react';
 import { useState } from 'react';
 
-import yflowCreateTodoGuide from '@/assets/img/custom/yflowCreateTodoGuide.png';
-import yflowTodo from '@/assets/img/custom/yflowTodo.png';
+import ActivepiecesCreateTodoGuide from '@/assets/img/custom/ActivepiecesCreateTodoGuide.png';
+import ActivepiecesTodo from '@/assets/img/custom/ActivepiecesTodo.png';
 import ExternalChannelTodo from '@/assets/img/custom/External_Channel_Todo.png';
 import { RadioGroupList } from '@/components/custom/radio-group-list';
 import { Button } from '@/components/ui/button';
@@ -144,7 +144,7 @@ export { AddTodoStepDialog as CreateTodoDialog };
 const PreviewImage = ({ todoType }: { todoType: TodoType }) => {
   const image =
     todoType === TodoType.INTERNAL
-      ? yflowCreateTodoGuide
+      ? ActivepiecesCreateTodoGuide
       : ExternalChannelTodo;
   const alt =
     todoType === TodoType.INTERNAL ? 'Todos flow' : 'External channel flow';
@@ -216,7 +216,7 @@ const TodoRadioGroup = ({
 
                   <div className="bg-muted rounded p-1">
                     <img
-                      src={yflowTodo}
+                      src={ActivepiecesTodo}
                       alt="Todo UI"
                       className="w-full h-auto rounded"
                     />

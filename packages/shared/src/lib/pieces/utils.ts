@@ -2,7 +2,7 @@ import semverMajor from 'semver/functions/major'
 import semverMinor from 'semver/functions/minor'
 import semverMinVersion from 'semver/ranges/min-version'
 import { assertNotNullOrUndefined } from '../common'
-import { yflowError, ErrorCode } from '../common/yflow-error'
+import { ErrorCode, yflowError } from '../common/activepieces-error'
 
 /**
  * @param {string} pieceName - starts with `@yflow/piece-`

@@ -1,5 +1,5 @@
 import { Static, Type } from '@sinclair/typebox'
-import { TriggerUpdateStatusErrorParams } from '../common/yflow-error'
+import { TriggerUpdateStatusErrorParams } from '../common/activepieces-error'
 import { PopulatedFlow } from '../flows/flow'
 import { StepRunResponse } from '../flows/sample-data'
 

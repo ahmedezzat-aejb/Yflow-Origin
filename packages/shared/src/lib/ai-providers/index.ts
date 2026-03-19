@@ -8,7 +8,7 @@ export enum AIProviderName {
     ANTHROPIC = 'anthropic',
     AZURE = 'azure',
     GOOGLE = 'google',
-    Yflow= 'yflow',
+    YFLOW = 'yflow',
     CLOUDFLARE_GATEWAY = 'cloudflare-gateway',
     CUSTOM = 'custom',
 }
@@ -104,13 +104,13 @@ export type BaseAIProviderAuthConfig = Static<typeof BaseAIProviderAuthConfig>
 export const AnthropicProviderAuthConfig = BaseAIProviderAuthConfig
 export type AnthropicProviderAuthConfig = Static<typeof AnthropicProviderAuthConfig>
 
-export const yflowProviderAuthConfig = Type.Intersect([
+export const YFLOW_PROVIDER_AUTH_CONFIG = Type.Intersect([
     BaseAIProviderAuthConfig,
     Type.Object({
         apiKeyHash: Type.String(),
     }),
 ])
-export type yflowProviderAuthConfig = Static<typeof yflowProviderAuthConfig>
+export type YFLOW_PROVIDER_AUTH_CONFIG = Static<typeof YFLOW_PROVIDER_AUTH_CONFIG>
 
 export const OpenAICompatibleProviderAuthConfig = BaseAIProviderAuthConfig
 export type OpenAICompatibleProviderAuthConfig = Static<typeof OpenAICompatibleProviderAuthConfig>
@@ -133,8 +133,8 @@ export type OpenRouterProviderAuthConfig = Static<typeof OpenRouterProviderAuthC
 export const AnthropicProviderConfig = Type.Object({})
 export type AnthropicProviderConfig = Static<typeof AnthropicProviderConfig>
 
-export const yflowProviderConfig = Type.Object({})
-export type yflowProviderConfig = Static<typeof yflowProviderConfig>
+export const YFLOW_PROVIDER_CONFIG = Type.Object({})
+export type YFLOW_PROVIDER_CONFIG = Static<typeof YFLOW_PROVIDER_CONFIG>
 
 export const ProviderModelConfig = Type.Object({
     modelId: Type.String(),
@@ -180,7 +180,7 @@ export const AIProviderAuthConfig = Type.Union([
     OpenRouterProviderAuthConfig,
     CloudflareGatewayProviderAuthConfig,
     OpenAICompatibleProviderAuthConfig,
-    yflowProviderAuthConfig,
+    YFLOW_PROVIDER_AUTH_CONFIG,
 ])
 export type AIProviderAuthConfig = Static<typeof AIProviderAuthConfig>
 // Order matters, put schemas with required fields first, empty ones last. This is to avoid empty objects matching any object.
@@ -192,7 +192,7 @@ export const AIProviderConfig = Type.Union([
     GoogleProviderConfig,
     OpenAIProviderConfig,
     OpenRouterProviderConfig,
-    yflowProviderConfig,
+    YFLOW_PROVIDER_CONFIG,
 ])
 export type AIProviderConfig = Static<typeof AIProviderConfig>
 
@@ -241,9 +241,9 @@ const ProviderConfigUnion = DiscriminatedUnion('provider', [
     }),
     Type.Object({
         displayName: Type.String({ minLength: 1 }),
-        provider: Type.Literal(AIProviderName.yflow),
-        config: yflowProviderConfig,
-        auth: yflowProviderAuthConfig,
+        provider: Type.Literal(AIProviderName.YFLOW),
+        config: YFLOW_PROVIDER_CONFIG,
+        auth: YFLOW_PROVIDER_AUTH_CONFIG,
     }),
 ])
 

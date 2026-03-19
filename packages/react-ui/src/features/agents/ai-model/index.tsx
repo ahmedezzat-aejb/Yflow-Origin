@@ -28,7 +28,7 @@ type AIModelSelectorProps = {
 };
 
 const yflow_PROVIDER_CONFIG = {
-  provider: AIProviderName.yflow,
+  provider: AIProviderName.YFLOW,
   name: 'yflow',
   markdown: '',
   logoUrl: 'https://cdn.yflow.com/pieces/yflow.png',
@@ -70,14 +70,14 @@ export function AIModelSelector({
   );
 
   const yflowProvider = React.useMemo(
-    () => providers.find((p) => p.provider === AIProviderName.yflow),
+    () => providers.find((p) => p.provider === AIProviderName.YFLOW),
     [providers],
   );
 
   const sortedProviders = React.useMemo(() => {
     return [...providers].sort((a, b) => {
-      if (a.provider === AIProviderName.yflow) return -1;
-      if (b.provider === AIProviderName.yflow) return 1;
+      if (a.provider === AIProviderName.YFLOW) return -1;
+      if (b.provider === AIProviderName.YFLOW) return 1;
       return 0;
     });
   }, [providers]);
