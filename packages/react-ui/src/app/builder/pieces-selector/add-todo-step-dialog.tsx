@@ -1,18 +1,24 @@
+import { isNil, TodoType } from '@yflow/shared';
 import { t } from 'i18next';
 import { InfoIcon } from 'lucide-react';
 import { useState } from 'react';
 
-import ActivepiecesCreateTodoGuide from '@/assets/img/custom/ActivepiecesCreateTodoGuide.png';
-import ActivepiecesTodo from '@/assets/img/custom/ActivepiecesTodo.png';
-import ExternalChannelTodo from '@/assets/img/custom/External_Channel_Todo.png';
+import { useBuilderStateContext } from '../builder-hooks';
+import {
+  createRouterStep,
+  createTodoStep,
+  createWaitForApprovalStep,
+} from './custom-piece-selector-items-utils';
+import GenericActionOrTriggerItem from './generic-piece-selector-item';
+
 import { RadioGroupList } from '@/components/custom/radio-group-list';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogFooter,
 } from '@/components/ui/dialog';
 import {
   Tooltip,
@@ -21,16 +27,10 @@ import {
 } from '@/components/ui/tooltip';
 import { useNewWindow } from '@/lib/navigation-utils';
 import { PieceSelectorOperation, PieceSelectorPieceItem } from '@/lib/types';
-import { isNil, TodoType } from '@yflow/shared';
 
-import { useBuilderStateContext } from '../builder-hooks';
-
-import {
-  createRouterStep,
-  createTodoStep,
-  createWaitForApprovalStep,
-} from './custom-piece-selector-items-utils';
-import GenericActionOrTriggerItem from './generic-piece-selector-item';
+const ActivepiecesCreateTodoGuide = '/src/assets/img/custom/ActivepiecesCreateTodoGuide.png';
+const ActivepiecesTodo = '/src/assets/img/custom/ActivepiecesTodo.png';
+const ExternalChannelTodo = '/src/assets/img/custom/External_Channel_Todo.png';
 
 type AddTodoStepDialogProps = {
   pieceSelectorItem: PieceSelectorPieceItem;
