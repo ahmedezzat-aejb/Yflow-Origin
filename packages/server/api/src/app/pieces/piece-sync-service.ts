@@ -1,7 +1,6 @@
-import { AppSystemProp, apVersionUtil, rejectedPromiseHandler } from '@yflow/server-shared'
-import { groupBy, PieceSyncMode, PieceType } from '@yflow/shared'
+import { AppSystemProp, rejectedPromiseHandler } from '@yflow/server-shared'
+import { PieceSyncMode, PieceType } from '@yflow/shared'
 import { FastifyBaseLogger } from 'fastify'
-import semver from 'semver'
 import { system } from '../helper/system/system'
 import { SystemJobName } from '../helper/system-jobs/common'
 import { systemJobHandlers } from '../helper/system-jobs/job-handlers'
@@ -10,7 +9,7 @@ import { localPieceCache } from './metadata/local-piece-cache'
 import { PieceMetadataSchema } from './metadata/piece-metadata-entity'
 import { pieceMetadataService, pieceRepos } from './metadata/piece-metadata-service'
 
-const CLOUD_API_URL = 'http://localhost:3333/api/v1/pieces'
+const CLOUD_API_URL = 'https://api.github.com/repos/activepieces/activepieces/contents/community-templates'
 const syncMode = system.get<PieceSyncMode>(AppSystemProp.PIECES_SYNC_MODE)
 
 export const pieceSyncService = (log: FastifyBaseLogger) => ({
@@ -47,11 +46,11 @@ export const pieceSyncService = (log: FastifyBaseLogger) => ({
             }), listCloudPieces()])
             const added = await installNewPieces(cloudPieces, dbPieces, log)
             const deleted = await deletePiecesIfNotOnCloud(dbPieces, cloudPieces, log)
-
+            const endTime = performance.now()
             log.info({
                 added,
                 deleted,
-                durationMs: Math.floor(performance.now() - startTime),
+                durationMs: Math.floor(endTime - startTime),
             }, 'Piece synchronization completed')
             await localPieceCache(log).refresh()
         }
@@ -94,32 +93,47 @@ async function installNewPieces(cloudPieces: PieceRegistryResponse[], dbPieces: 
 
 
 async function listCloudPieces(): Promise<PieceRegistryResponse[]> {
-    const queryParams = new URLSearchParams()
-    queryParams.append('edition', system.getEdition())
-    queryParams.append('release', await apVersionUtil.getCurrentRelease())
-    const response = await fetch(`${CLOUD_API_URL}/registry?${queryParams.toString()}`)
-    if (!response.ok) {
-        throw new Error(`Failed to fetch cloud pieces: ${response.status}`)
-    }
-    const pieces: PieceRegistryResponse[] = await response.json()
-    const piecesByName = groupBy(pieces, p => p.name)
-    const latest = []
-    const others = []
-
-    for (const group of Object.values(piecesByName)) {
-        const sortedByVersion = sortByVersionDesc(group)
-        latest.push(sortedByVersion[0])
-        others.push(...sortedByVersion.slice(1))
-    }
-
-    return [...latest, ...others]
+    // Return mock pieces for Community Edition
+    return [
+        {
+            name: 'slack',
+            version: '1.0.0',
+        },
+        {
+            name: 'gmail',
+            version: '1.0.0',
+        },
+        {
+            name: 'discord',
+            version: '1.0.0',
+        },
+        {
+            name: 'google-sheets',
+            version: '1.0.0',
+        },
+        {
+            name: 'webhook',
+            version: '1.0.0',
+        },
+        {
+            name: 'http',
+            version: '1.0.0',
+        },
+        {
+            name: 'ai-agent',
+            version: '1.0.0',
+        },
+        {
+            name: 'image-ai',
+            version: '1.0.0',
+        },
+        {
+            name: 'text-ai',
+            version: '1.0.0',
+        },
+    ]
 }
 
-function sortByVersionDesc(items: PieceRegistryResponse[]) {
-    return [...items].sort((a, b) =>
-        semver.rcompare(a.version, b.version),
-    )
-}
 
 type PieceRegistryResponse = {
     name: string
