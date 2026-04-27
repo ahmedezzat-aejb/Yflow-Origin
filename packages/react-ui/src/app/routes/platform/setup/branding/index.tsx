@@ -15,7 +15,7 @@ export const BrandingPage = () => {
       lockDescription={t(
         'Give your users an experience that looks like you by customizing the color, logo and more',
       )}
-      lockVideoUrl="https://cdn.yflow.com/videos/showcase/appearance.mp4"
+      lockVideoUrl="https://cdn.yflow.ru/videos/showcase/appearance.mp4"
     >
       <div className="w-full flex flex-col gap-4">
         <DashboardPageHeader

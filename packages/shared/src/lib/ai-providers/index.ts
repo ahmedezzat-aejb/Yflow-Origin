@@ -24,7 +24,7 @@ export const SUPPORTED_AI_PROVIDERS: AiProviderInfo[] = [
 
 It is strongly recommended that you add your credit card information to your OpenAI account and upgrade to the paid plan **before** generating the API Key. This will help you prevent 429 errors.
 `),
-        logoUrl: 'https://cdn.yflow.com/pieces/openai.png',
+        logoUrl: 'https://cdn.yflow.ru/pieces/openai.png',
     },
     {
         provider: AIProviderName.ANTHROPIC,
@@ -34,7 +34,7 @@ It is strongly recommended that you add your credit card information to your Ope
 1. Visit the following website: https://console.anthropic.com/settings/keys.
 2. Once on the website, locate and click on the option to obtain your Claude API Key.
 `),
-        logoUrl: 'https://cdn.yflow.com/pieces/claude.png',
+        logoUrl: 'https://cdn.yflow.ru/pieces/claude.png',
     },
     {
         provider: AIProviderName.GOOGLE,
@@ -43,12 +43,12 @@ It is strongly recommended that you add your credit card information to your Ope
 1. Visit the following website: https://console.cloud.google.com/apis/credentials.
 2. Once on the website, locate and click on the option to obtain your Google API Key.
 `),
-        logoUrl: 'https://cdn.yflow.com/pieces/google-gemini.png',
+        logoUrl: 'https://cdn.yflow.ru/pieces/google-gemini.png',
     },
     {
         provider: AIProviderName.AZURE,
         name: 'Azure',
-        logoUrl: 'https://cdn.yflow.com/pieces/azure-openai.png',
+        logoUrl: 'https://cdn.yflow.ru/pieces/azure-openai.png',
         markdown: t(
             'Use the Azure Portal to browse to your OpenAI resource and retrieve an API key and resource name.',
         ),
@@ -56,7 +56,7 @@ It is strongly recommended that you add your credit card information to your Ope
     {
         provider: AIProviderName.OPENROUTER,
         name: 'OpenRouter',
-        logoUrl: 'https://cdn.yflow.com/pieces/openrouter.jpg',
+        logoUrl: 'https://cdn.yflow.ru/pieces/openrouter.jpg',
         markdown: t(`Follow these instructions to get your OpenRouter API Key:
 1. Visit the following website: https://openrouter.ai/settings/keys.
 2. Once on the website, locate and click on the option to obtain your OpenRouter API Key.`),
@@ -64,7 +64,7 @@ It is strongly recommended that you add your credit card information to your Ope
     {
         provider: AIProviderName.CLOUDFLARE_GATEWAY,
         name: 'Cloudflare AI Gateway',
-        logoUrl: 'https://cdn.yflow.com/pieces/cloudflare-gateway.png',
+        logoUrl: 'https://cdn.yflow.ru/pieces/cloudflare-gateway.png',
         markdown:
       t(`Follow these instructions to get your Cloudflare AI Gateway API Key:
 1. Visit the following website: https://developers.cloudflare.com/ai-gateway/get-started/.
@@ -75,7 +75,7 @@ It is strongly recommended that you add your credit card information to your Ope
     {
         provider: AIProviderName.CUSTOM,
         name: 'OpenAI Compatible',
-        logoUrl: 'https://cdn.yflow.com/pieces/openai-compatible.png',
+        logoUrl: 'https://cdn.yflow.ru/pieces/openai-compatible.png',
         markdown:
       t(`Follow these instructions to get your OpenAI Compatible API Key:
 1. Set the base url to your proxy url.

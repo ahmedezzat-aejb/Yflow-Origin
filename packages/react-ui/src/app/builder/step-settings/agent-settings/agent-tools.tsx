@@ -16,10 +16,10 @@ import type { AgentPieceTool, AgentTool } from '@yflow/shared';
 import { AgentPieceDialog } from './piece-tool-dialog';
 
 const icons = [
-  'https://cdn.yflow.com/pieces/youtube.png',
-  'https://cdn.yflow.com/pieces/slack.png',
-  'https://cdn.yflow.com/pieces/github.png',
-  'https://cdn.yflow.com/pieces/notion.png',
+  'https://cdn.yflow.ru/pieces/youtube.png',
+  'https://cdn.yflow.ru/pieces/slack.png',
+  'https://cdn.yflow.ru/pieces/github.png',
+  'https://cdn.yflow.ru/pieces/notion.png',
 ];
 
 interface AgentToolsProps {

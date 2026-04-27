@@ -102,7 +102,7 @@ const ApiKeysPage = () => {
       lockDescription={t(
         'Create and manage API keys to access YflowAPIs.',
       )}
-      lockVideoUrl="https://cdn.yflow.com/videos/showcase/api-keys.mp4"
+      lockVideoUrl="https://cdn.yflow.ru/videos/showcase/api-keys.mp4"
     >
       <div className="flex-col w-full">
         <DashboardPageHeader

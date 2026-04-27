@@ -204,7 +204,7 @@ const PlatformTemplatesPage = () => {
       lockDescription={t(
         'Convert the most common automations into reusable templates 1 click away from your users',
       )}
-      lockVideoUrl="https://cdn.yflow.com/videos/showcase/templates.mp4"
+      lockVideoUrl="https://cdn.yflow.ru/videos/showcase/templates.mp4"
     >
       <div className="flex flex-col w-full">
         <DashboardPageHeader

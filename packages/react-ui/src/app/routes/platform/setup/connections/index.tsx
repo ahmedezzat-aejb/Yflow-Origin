@@ -289,7 +289,7 @@ const GlobalConnectionsTable = () => {
         lockDescription={t(
           'Manage platform-wide connections to external systems.',
         )}
-        lockVideoUrl="https://cdn.yflow.com/videos/showcase/global-connections.mp4"
+        lockVideoUrl="https://cdn.yflow.ru/videos/showcase/global-connections.mp4"
       >
         <DashboardPageHeader
           description={t(

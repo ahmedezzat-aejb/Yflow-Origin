@@ -29,13 +29,13 @@ type AIPieceActionsListProps = {
 };
 
 const ACTION_ICON_MAP: Record<string, string> = {
-  run_agent: 'https://cdn.yflow.com/pieces/new-core/agent.svg',
-  generateImage: 'https://cdn.yflow.com/pieces/new-core/image-ai.svg',
-  askAi: 'https://cdn.yflow.com/pieces/new-core/text-ai.svg',
-  summarizeText: 'https://cdn.yflow.com/pieces/new-core/text-ai.svg',
-  classifyText: 'https://cdn.yflow.com/pieces/new-core/text-ai.svg',
+  run_agent: 'https://cdn.yflow.ru/pieces/new-core/agent.svg',
+  generateImage: 'https://cdn.yflow.ru/pieces/new-core/image-ai.svg',
+  askAi: 'https://cdn.yflow.ru/pieces/new-core/text-ai.svg',
+  summarizeText: 'https://cdn.yflow.ru/pieces/new-core/text-ai.svg',
+  classifyText: 'https://cdn.yflow.ru/pieces/new-core/text-ai.svg',
   extractStructuredData:
-    'https://cdn.yflow.com/pieces/new-core/utility-ai.svg',
+    'https://cdn.yflow.ru/pieces/new-core/utility-ai.svg',
 };
 
 export const AIPieceActionsList: React.FC<AIPieceActionsListProps> = ({
@@ -64,7 +64,7 @@ export const AIPieceActionsList: React.FC<AIPieceActionsListProps> = ({
           const actionIcon =
             item.type === FlowActionType.PIECE
               ? ACTION_ICON_MAP[item.actionOrTrigger.name]
-              : 'https://cdn.yflow.com/pieces/new-core/image-ai.svg';
+              : 'https://cdn.yflow.ru/pieces/new-core/image-ai.svg';
           return (
             <AIActionItem
               key={index}

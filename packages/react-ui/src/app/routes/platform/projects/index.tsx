@@ -289,7 +289,7 @@ export default function ProjectsPage() {
       lockDescription={t(
         'Orchestrate your automation teams across projects with their own flows, connections and usage quotas',
       )}
-      lockVideoUrl="https://cdn.yflow.com/videos/showcase/projects.mp4"
+      lockVideoUrl="https://cdn.yflow.ru/videos/showcase/projects.mp4"
     >
       <div className="flex flex-col w-full">
         <DashboardPageHeader
