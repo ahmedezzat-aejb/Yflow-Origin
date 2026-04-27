@@ -93,14 +93,11 @@ async function installNewPieces(cloudPieces: PieceRegistryResponse[], dbPieces: 
 
 
 async function listCloudPieces(): Promise<PieceRegistryResponse[]> {
-    // Return mock pieces for Community Edition
+    // Return comprehensive mock pieces for Community Edition (like Activepieces)
     return [
+        // Communication
         {
             name: 'slack',
-            version: '1.0.0',
-        },
-        {
-            name: 'gmail',
             version: '1.0.0',
         },
         {
@@ -108,7 +105,37 @@ async function listCloudPieces(): Promise<PieceRegistryResponse[]> {
             version: '1.0.0',
         },
         {
+            name: 'gmail',
+            version: '1.0.0',
+        },
+        {
+            name: 'outlook',
+            version: '1.0.0',
+        },
+        {
+            name: 'teams',
+            version: '1.0.0',
+        },
+        // Data & Spreadsheets
+        {
             name: 'google-sheets',
+            version: '1.0.0',
+        },
+        {
+            name: 'excel',
+            version: '1.0.0',
+        },
+        {
+            name: 'airtable',
+            version: '1.0.0',
+        },
+        {
+            name: 'notion',
+            version: '1.0.0',
+        },
+        // Web & HTTP
+        {
+            name: 'http',
             version: '1.0.0',
         },
         {
@@ -116,9 +143,23 @@ async function listCloudPieces(): Promise<PieceRegistryResponse[]> {
             version: '1.0.0',
         },
         {
-            name: 'http',
+            name: 'json-parser',
             version: '1.0.0',
         },
+        // Database
+        {
+            name: 'mysql',
+            version: '1.0.0',
+        },
+        {
+            name: 'postgresql',
+            version: '1.0.0',
+        },
+        {
+            name: 'mongodb',
+            version: '1.0.0',
+        },
+        // AI & Automation
         {
             name: 'ai-agent',
             version: '1.0.0',
@@ -129,6 +170,76 @@ async function listCloudPieces(): Promise<PieceRegistryResponse[]> {
         },
         {
             name: 'text-ai',
+            version: '1.0.0',
+        },
+        {
+            name: 'openai',
+            version: '1.0.0',
+        },
+        // E-commerce
+        {
+            name: 'shopify',
+            version: '1.0.0',
+        },
+        {
+            name: 'woocommerce',
+            version: '1.0.0',
+        },
+        // CRM
+        {
+            name: 'hubspot',
+            version: '1.0.0',
+        },
+        {
+            name: 'salesforce',
+            version: '1.0.0',
+        },
+        // File Storage
+        {
+            name: 'google-drive',
+            version: '1.0.0',
+        },
+        {
+            name: 'dropbox',
+            version: '1.0.0',
+        },
+        {
+            name: 'onedrive',
+            version: '1.0.0',
+        },
+        // Project Management
+        {
+            name: 'jira',
+            version: '1.0.0',
+        },
+        {
+            name: 'trello',
+            version: '1.0.0',
+        },
+        {
+            name: 'asana',
+            version: '1.0.0',
+        },
+        // Marketing
+        {
+            name: 'mailchimp',
+            version: '1.0.0',
+        },
+        {
+            name: 'sendgrid',
+            version: '1.0.0',
+        },
+        // Utilities
+        {
+            name: 'delay',
+            version: '1.0.0',
+        },
+        {
+            name: 'logger',
+            version: '1.0.0',
+        },
+        {
+            name: 'data-mapper',
             version: '1.0.0',
         },
     ]
