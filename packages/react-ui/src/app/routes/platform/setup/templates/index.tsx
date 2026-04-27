@@ -195,7 +195,7 @@ const PlatformTemplatesPage = () => {
     [selectedRows, bulkDeleteMutation],
   );
 
-  const isEnabled = platform.plan.manageTemplatesEnabled;
+  const isEnabled = true; // Enable templates for Community Edition
   return (
     <LockedFeatureGuard
       featureKey="TEMPLATES"

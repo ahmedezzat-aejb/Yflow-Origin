@@ -142,20 +142,7 @@ const PiecesSettings = () => {
 
   return (
     <div className="space-y-6">
-      {!platform.plan.managePiecesEnabled && (
-        <LockedAlert
-          title={t('Control Pieces')}
-          description={t(
-            "Show the pieces that matter most to your users and hide the ones you don't like.",
-          )}
-          button={
-            <RequestTrial
-              featureKey="ENTERPRISE_PIECES"
-              buttonVariant="outline-primary"
-            />
-          }
-        />
-      )}
+      {/* Pieces enabled for Community Edition */}
       <DataTable
         emptyStateTextTitle={t('No pieces found')}
         emptyStateTextDescription={t(
@@ -178,7 +165,7 @@ const PiecesSettings = () => {
         }}
         isLoading={isLoading}
         hidePagination={true}
-        bulkActions={platform.plan.managePiecesEnabled ? bulkActions : []}
+        bulkActions={bulkActions} // Enable bulk actions for Community Edition
       />
     </div>
   );

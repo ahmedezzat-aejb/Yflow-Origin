@@ -62,25 +62,25 @@ export function PlatformSidebar() {
       to: '/platform/setup/branding',
       label: t('Branding'),
       icon: Palette,
-      locked: !platform.plan.customAppearanceEnabled,
+      locked: false, // Enable branding for Community Edition
     },
     {
       to: '/platform/setup/connections',
       label: t('Global Connections'),
       icon: Unplug,
-      locked: !platform.plan.globalConnectionsEnabled,
+      locked: false, // Enable global connections for Community Edition
     },
     {
       to: '/platform/setup/pieces',
       label: t('Pieces'),
       icon: Puzzle,
-      locked: !platform.plan.managePiecesEnabled,
+      locked: false, // Enable pieces for Community Edition
     },
     {
       to: '/platform/setup/templates',
       label: t('Templates'),
       icon: LayoutGrid,
-      locked: !platform.plan.manageTemplatesEnabled,
+      locked: false, // Enable templates for Community Edition
     },
     {
       to: '/platform/setup/billing',

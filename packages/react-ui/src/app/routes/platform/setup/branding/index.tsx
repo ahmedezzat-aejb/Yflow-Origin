@@ -10,7 +10,7 @@ export const BrandingPage = () => {
   return (
     <LockedFeatureGuard
       featureKey="BRANDING"
-      locked={!platform.plan.customAppearanceEnabled}
+      locked={false} // Enable branding for Community Edition
       lockTitle={t('Brand yflow')}
       lockDescription={t(
         'Give your users an experience that looks like you by customizing the color, logo and more',

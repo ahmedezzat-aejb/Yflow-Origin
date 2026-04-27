@@ -35,7 +35,7 @@ import { isNil, OAuth2GrantType, PieceScope } from '@yflow/shared';
 
 const PlatformPiecesPage = () => {
   const { platform } = platformHooks.useCurrentPlatform();
-  const isEnabled = platform.plan.managePiecesEnabled;
+  const isEnabled = true; // Enable pieces for Community Edition
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get('name') ?? '';
   const {

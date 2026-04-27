@@ -70,7 +70,7 @@ const InstallPieceDialog = ({
   scope,
 }: InstallPieceDialogProps) => {
   const { platform } = platformHooks.useCurrentPlatform();
-  const isEnabled = platform.plan.managePiecesEnabled;
+  const isEnabled = true; // Enable pieces for Community Edition
   const [isOpen, setIsOpen] = useState(false);
 
   const { data: privatePiecesEnabled } = flagsHooks.useFlag<boolean>(
