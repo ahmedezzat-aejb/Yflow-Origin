@@ -79,16 +79,16 @@ const TemplatesPage = () => {
 
   const selectedCategoryTemplates = useMemo(() => {
     if (selectedCategory === 'All') {
-      return templates || [];
+      return isShowingOfficialTemplates ? (allOfficialTemplates || []) : (templates || []);
     }
     return templatesByCategory[selectedCategory] || [];
-  }, [selectedCategory, templates, templatesByCategory]);
+  }, [selectedCategory, templates, templatesByCategory, isShowingOfficialTemplates, allOfficialTemplates]);
 
   const showLoading =
     isLoading || (isShowingOfficialTemplates && isAllTemplatesLoading);
   const showAllCategories =
     isShowingOfficialTemplates && selectedCategory === 'All';
-  const hasTemplates = templates && templates.length > 0;
+  const hasTemplates = (templates && templates.length > 0) || (isShowingOfficialTemplates && allOfficialTemplates && allOfficialTemplates.length > 0);
   const showCategoryTitleForOfficialTemplates =
     isShowingOfficialTemplates && selectedCategory !== 'All';
 
