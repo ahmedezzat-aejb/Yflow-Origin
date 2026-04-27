@@ -72,28 +72,19 @@ export function ProjectDashboardSidebar() {
   }, [searchOpen]);
 
   const shouldShowNewProjectButton = useMemo(() => {
-    if (platform.plan.teamProjectsLimit === TeamProjectsLimit.NONE) {
-      return false;
-    }
+    // Enable projects for Community Edition
     return currentUser?.platformRole === PlatformRole.ADMIN;
-  }, [platform.plan.teamProjectsLimit]);
+  }, [currentUser?.platformRole]);
 
   const shouldShowSearchButton = useMemo(() => {
-    if (platform.plan.teamProjectsLimit === TeamProjectsLimit.NONE) {
-      return false;
-    }
+    // Enable search for Community Edition
     return true;
-  }, [platform.plan.teamProjectsLimit]);
+  }, []);
 
   const shouldDisableNewProjectButton = useMemo(() => {
-    if (platform.plan.teamProjectsLimit === TeamProjectsLimit.ONE) {
-      const teamProjects = projects.filter(
-        (project) => project.type === ProjectType.TEAM,
-      );
-      return teamProjects.length >= 1;
-    }
+    // Disable project limits for Community Edition
     return false;
-  }, [platform.plan.teamProjectsLimit, projects]);
+  }, []);
 
   const isSearchMode = debouncedSearchQuery.length > 0;
 

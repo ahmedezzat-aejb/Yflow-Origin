@@ -38,7 +38,7 @@ export default function ProjectsPage() {
   const { platform } = platformHooks.useCurrentPlatform();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const isEnabled = platform.plan.teamProjectsLimit !== TeamProjectsLimit.NONE;
+  const isEnabled = true; // Enable projects for Community Edition
   const { project: currentProject } =
     projectCollectionUtils.useCurrentProject();
   const { data: currentUser } = userHooks.useCurrentUser();

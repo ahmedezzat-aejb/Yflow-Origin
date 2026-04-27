@@ -106,7 +106,7 @@ export function PlatformSidebar() {
           to: '/platform/projects',
           label: t('Projects'),
           icon: LayoutGrid,
-          locked: platform.plan.teamProjectsLimit === TeamProjectsLimit.NONE,
+          locked: false, // Enable projects for Community Edition
         },
         {
           to: '/platform/users',
