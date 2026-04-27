@@ -31,7 +31,7 @@ const yflow_PROVIDER_CONFIG = {
   provider: AIProviderName.YFLOW,
   name: 'yflow',
   markdown: '',
-  logoUrl: 'https://cdn.yflow.ru/pieces/yflow.png',
+  logoUrl: '/pieces/yflow.png',
 };
 
 const ALL_PROVIDERS = [...SUPPORTED_AI_PROVIDERS, yflow_PROVIDER_CONFIG];

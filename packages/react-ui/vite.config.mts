@@ -14,7 +14,7 @@ export default defineConfig(({ command, mode }) => {
   const AP_TITLE = isDev ? 'YFlow' : '${AP_APP_TITLE}';
 
   const AP_FAVICON = isDev
-    ? 'https://cdn.yflow.ru/favicon.ico'
+    ? '/favicon.ico'
     : '${AP_FAVICON_URL}';
 
   return {

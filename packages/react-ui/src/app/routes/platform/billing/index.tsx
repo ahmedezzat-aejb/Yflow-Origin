@@ -29,16 +29,7 @@ export default function Billing() {
   const { data: edition } = flagsHooks.useFlag<ApEdition>(ApFlagId.EDITION);
 
   return (
-    <LockedFeatureGuard
-      featureKey="BILLING"
-      locked={edition === ApEdition.COMMUNITY}
-      lockTitle={t('Unlock Billing Page')}
-      lockDescription={t(
-        'Upgrade to the Enterprise edition to access billing and usage management.',
-      )}
-    >
-      <BillingPageDetails />
-    </LockedFeatureGuard>
+    <BillingPageDetails />
   );
 }
 

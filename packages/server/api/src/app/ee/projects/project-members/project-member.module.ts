@@ -5,7 +5,8 @@ import { projectMemberController } from './project-member.controller'
 
 export const projectMemberModule: FastifyPluginAsyncTypebox = async (app) => {
     app.addHook('preSerialization', entitiesMustBeOwnedByCurrentProject)
-    app.addHook('preHandler', platformMustHaveFeatureEnabled((platform) => platform.plan.projectRolesEnabled))
+    // Remove project roles requirement for Community Edition
+    // app.addHook('preHandler', platformMustHaveFeatureEnabled((platform) => platform.plan.projectRolesEnabled))
     await app.register(projectMemberController, {
         prefix: '/v1/project-members',
     })

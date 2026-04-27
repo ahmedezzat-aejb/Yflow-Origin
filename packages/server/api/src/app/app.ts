@@ -100,7 +100,7 @@ export const setupApp = async (app: FastifyInstance): Promise<FastifyInstance> =
         openapi: {
             servers: [
                 {
-                    url: 'https://app.yflow.ru/api',
+                    url: 'http://localhost:3333/api',
                     description: 'Production Server',
                 },
             ],
@@ -151,7 +151,7 @@ export const setupApp = async (app: FastifyInstance): Promise<FastifyInstance> =
                 version: '0.0.0',
             },
             externalDocs: {
-                url: 'https://yflow.ru/docs',
+                url: 'http://localhost:3333/docs',
                 description: 'Find more info here',
             },
         },

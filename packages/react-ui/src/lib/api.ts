@@ -12,7 +12,7 @@ import { authenticationSession } from './authentication-session';
 
 export const API_BASE_URL =
   import.meta.env.MODE === 'cloud'
-    ? 'https://app.yflow.ru'
+    ? window.location.origin
     : window.location.origin;
 export const API_URL = `${API_BASE_URL}/api`;
 const disallowedRoutes = [

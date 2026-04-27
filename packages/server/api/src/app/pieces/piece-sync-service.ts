@@ -10,7 +10,7 @@ import { localPieceCache } from './metadata/local-piece-cache'
 import { PieceMetadataSchema } from './metadata/piece-metadata-entity'
 import { pieceMetadataService, pieceRepos } from './metadata/piece-metadata-service'
 
-const CLOUD_API_URL = 'https://cloud.yflow.com/api/v1/pieces'
+const CLOUD_API_URL = 'http://localhost:3333/api/v1/pieces'
 const syncMode = system.get<PieceSyncMode>(AppSystemProp.PIECES_SYNC_MODE)
 
 export const pieceSyncService = (log: FastifyBaseLogger) => ({

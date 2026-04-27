@@ -15,10 +15,16 @@ export const authenticationUtils = {
         email,
         platformId,
     }: AssertUserIsInvitedToPlatformOrProjectParams): Promise<void> {
+        // Allow open registration for Community Edition
+        const edition = system.getEdition()
+        if (edition === ApEdition.COMMUNITY) {
+            return
+        }
+
         const isInvited = await userInvitationsService(log).hasAnyAcceptedInvitations({
             platformId,
             email,
-            
+
         })
         if (!isInvited) {
             throw new yflowError({
