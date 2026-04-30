@@ -12,9 +12,6 @@ import { AIPieceActionsList } from './ai-actions-list';
 
 const AITabContent = ({ operation }: { operation: PieceSelectorOperation }) => {
   const { selectedTab } = usePieceSelectorTabs();
-  const { pieceModel, isLoading } = piecesHooks.usePiece({
-    name: '@yflow/piece-ai',
-  });
 
   if (
     selectedTab !== PieceSelectorTabType.AI_AND_AGENTS ||
@@ -25,23 +22,46 @@ const AITabContent = ({ operation }: { operation: PieceSelectorOperation }) => {
     return null;
   }
 
-  if (isLoading || isNil(pieceModel)) {
-    return (
-      <div className="flex flex-col gap-2 w-full">
-        <CardListItemSkeleton numberOfCards={2} withCircle={false} />
-      </div>
-    );
-  }
-
-  const metadata = stepUtils.mapPieceToMetadata({
-    piece: pieceModel,
-    type: 'action',
-  });
-
+  // Use mock AI piece metadata for Community Edition
   const pieceMetadataWithSuggestion = {
-    ...metadata,
-    suggestedActions: Object.values(pieceModel?.actions),
-    suggestedTriggers: Object.values(pieceModel.triggers),
+    name: 'ai-agent',
+    displayName: 'AI Agent',
+    description: 'AI Agent for various tasks',
+    logoUrl: '/pieces/new-core/agent.svg',
+    type: FlowActionType.PIECE,
+    suggestedActions: [
+      {
+        name: 'askAi',
+        displayName: 'Ask AI',
+        description: 'Ask AI for help with text generation',
+      },
+      {
+        name: 'generateImage',
+        displayName: 'Generate Image',
+        description: 'Generate images using AI',
+      },
+      {
+        name: 'summarizeText',
+        displayName: 'Summarize Text',
+        description: 'Summarize long text using AI',
+      },
+      {
+        name: 'classifyText',
+        displayName: 'Classify Text',
+        description: 'Classify text into categories',
+      },
+      {
+        name: 'extractStructuredData',
+        displayName: 'Extract Data',
+        description: 'Extract structured data from text',
+      },
+      {
+        name: 'run_agent',
+        displayName: 'Run Agent',
+        description: 'Run an AI agent',
+      },
+    ],
+    suggestedTriggers: [],
   };
 
   return (
