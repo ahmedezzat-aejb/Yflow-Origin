@@ -1,24 +1,19 @@
-import { t } from 'i18next';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'sonner';
 
 import { useTelemetry } from '@/components/telemetry-provider';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { flagsHooks } from '@/hooks/flags-hooks';
 import {
   PieceSelectorOperation,
   StepMetadataWithSuggestions,
 } from '@/lib/types';
 import {
-  ApFlagId,
   FlowActionType,
   TelemetryEventName,
 } from '@yflow/shared';
 
 import { usePieceSearchContext } from '../../../../features/pieces/lib/piece-search-context';
 import { useBuilderStateContext } from '../../builder-hooks';
-import { convertStepMetadataToPieceSelectorItems } from '../piece-actions-or-triggers-list';
+import { AI_ACTIONS_METADATA } from '@/features/pieces/lib/step-utils';
 
 import AIActionItem from './ai-action';
 
@@ -48,23 +43,16 @@ export const AIPieceActionsList: React.FC<AIPieceActionsListProps> = ({
   const [handleAddingOrUpdatingStep] = useBuilderStateContext((state) => [
     state.handleAddingOrUpdatingStep,
   ]);
-  const { data: isAgentsConfigured } = flagsHooks.useFlag<boolean>(
-    ApFlagId.AGENTS_CONFIGURED,
-  );
+  const isAgentsConfigured = true; // Enable AI actions for Community Edition
   const navigate = useNavigate();
 
-  const aiActions = convertStepMetadataToPieceSelectorItems(
-    stepMetadataWithSuggestions,
-  );
+  const aiActions = AI_ACTIONS_METADATA;
 
   return (
     <ScrollArea className="h-full" viewPortClassName="h-full">
       <div className="grid grid-cols-3 p-2 gap-3 min-w-[350px]">
         {aiActions.map((item, index) => {
-          const actionIcon =
-            item.type === FlowActionType.PIECE
-              ? ACTION_ICON_MAP[item.actionOrTrigger.name]
-              : '/pieces/new-core/image-ai.svg';
+          const actionIcon = item.logoUrl;
           return (
             <AIActionItem
               key={index}
@@ -75,21 +63,6 @@ export const AIPieceActionsList: React.FC<AIPieceActionsListProps> = ({
                 logoUrl: actionIcon,
               }}
               onClick={() => {
-                if (!isAgentsConfigured) {
-                  toast('Connect to OpenAI', {
-                    description: t(
-                      "To create an agent, you'll first need to connect to OpenAI in platform settings.",
-                    ),
-                    action: {
-                      label: 'Set Up',
-                      onClick: () => {
-                        navigate('/platform/setup/ai');
-                      },
-                    },
-                  });
-                  return;
-                }
-
                 if (item.type === FlowActionType.PIECE) {
                   capture({
                     name: TelemetryEventName.PIECE_SELECTOR_SEARCH,

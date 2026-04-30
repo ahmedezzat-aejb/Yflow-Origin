@@ -2,7 +2,7 @@ import { readdir, readFile, stat } from 'node:fs/promises'
 import { join, resolve } from 'node:path'
 import { cwd } from 'node:process'
 import { sep } from 'path'
-import importFresh from '@yflow/import-fresh-webpack'
+const importFresh = require('import-fresh')
 import { Piece, PieceMetadata, pieceTranslation } from '@yflow/pieces-framework'
 import { extractPieceFromModule } from '@yflow/shared'
 import clearModule from 'clear-module'

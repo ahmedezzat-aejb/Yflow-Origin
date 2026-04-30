@@ -202,6 +202,7 @@
     "i18next-browser-languagedetector": "8.0.0",
     "i18next-http-backend": "2.5.2",
     "i18next-icu": "2.3.0",
+    "import-fresh": "4.0.0",
     "intercom-client": "6.2.0",
     "intl-messageformat": "10.5.14",
     "ioredis": "5.4.1",
