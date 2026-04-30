@@ -94,6 +94,14 @@ export const PlatformPlan = Type.Object({
     ykassaSubscriptionEndDate: Type.Optional(Type.Number()),
     ykassaSubscriptionCancelDate: Type.Optional(Type.Number()),
 
+    // Sberbank fields (Russia)
+    sberbankCustomerId: Type.Optional(Type.String()),
+    sberbankSubscriptionId: Type.Optional(Type.String()),
+    sberbankSubscriptionStatus: Type.Optional(Type.String()),
+    sberbankSubscriptionStartDate: Type.Optional(Type.Number()),
+    sberbankSubscriptionEndDate: Type.Optional(Type.Number()),
+    sberbankSubscriptionCancelDate: Type.Optional(Type.Number()),
+
     projectsLimit: Nullable(Type.Number()),
     activeFlowsLimit: Nullable(Type.Number()),
 

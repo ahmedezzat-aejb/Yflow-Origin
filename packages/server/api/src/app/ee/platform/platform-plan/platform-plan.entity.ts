@@ -113,6 +113,30 @@ export const PlatformPlanEntity = new EntitySchema<PlatformPlanSchema>({
             type: String,
             nullable: true,
         },
+        sberbankCustomerId: {
+            type: String,
+            nullable: true,
+        },
+        sberbankSubscriptionId: {
+            type: String,
+            nullable: true,
+        },
+        sberbankSubscriptionStatus: {
+            type: String,
+            nullable: true,
+        },
+        sberbankSubscriptionStartDate: {
+            type: Number,
+            nullable: true,
+        },
+        sberbankSubscriptionEndDate: {
+            type: Number,
+            nullable: true,
+        },
+        sberbankSubscriptionCancelDate: {
+            type: Number,
+            nullable: true,
+        },
         projectsLimit: {
             type: Number,
             nullable: true,
