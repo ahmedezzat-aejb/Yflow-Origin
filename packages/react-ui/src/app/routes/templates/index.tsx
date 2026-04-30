@@ -24,19 +24,82 @@ import { SelectedCategoryView } from './selected-category-view';
 
 const TemplatesPage = () => {
   const navigate = useNavigate();
-  const { data: templateCategories } = templatesHooks.useTemplateCategories();
+  // Mock categories for Community Edition
+  const mockCategories = [
+    { name: 'All', displayName: 'All' },
+    { name: 'Communication', displayName: 'Communication' },
+    { name: 'Marketing', displayName: 'Marketing' },
+    { name: 'Data', displayName: 'Data' },
+    { name: 'AI', displayName: 'AI' },
+    { name: 'Social', displayName: 'Social' },
+  ];
+
+  const templateCategories = mockCategories;
   const { platform } = platformHooks.useCurrentPlatform();
   const isShowingOfficialTemplates = true; // Show official templates for Community Edition
-  const { templates, isLoading, search, setSearch, category, setCategory } =
-    templatesHooks.useTemplates(
-      isShowingOfficialTemplates ? TemplateType.OFFICIAL : TemplateType.CUSTOM,
-    );
-  const selectedCategory = category as string;
-  const { data: allOfficialTemplates, isLoading: isAllTemplatesLoading } =
-    templatesHooks.useAllOfficialTemplates();
+
+  const mockTemplates = [
+    {
+      id: 'slack-notifications',
+      name: 'Slack Notifications',
+      description: 'Send notifications to Slack channels',
+      categories: ['Communication'],
+      type: 'OFFICIAL',
+      platformId: null,
+      created: new Date().toISOString(),
+      updated: new Date().toISOString(),
+    },
+    {
+      id: 'email-marketing',
+      name: 'Email Marketing',
+      description: 'Automated email marketing campaigns',
+      categories: ['Marketing'],
+      type: 'OFFICIAL',
+      platformId: null,
+      created: new Date().toISOString(),
+      updated: new Date().toISOString(),
+    },
+    {
+      id: 'data-sync',
+      name: 'Data Synchronization',
+      description: 'Sync data between different systems',
+      categories: ['Data'],
+      type: 'OFFICIAL',
+      platformId: null,
+      created: new Date().toISOString(),
+      updated: new Date().toISOString(),
+    },
+    {
+      id: 'ai-workflow',
+      name: 'AI Workflow Automation',
+      description: 'Automate workflows with AI',
+      categories: ['AI'],
+      type: 'OFFICIAL',
+      platformId: null,
+      created: new Date().toISOString(),
+      updated: new Date().toISOString(),
+    },
+    {
+      id: 'social-media',
+      name: 'Social Media Management',
+      description: 'Manage social media posts automatically',
+      categories: ['Social'],
+      type: 'OFFICIAL',
+      platformId: null,
+      created: new Date().toISOString(),
+      updated: new Date().toISOString(),
+    },
+  ];
+
+  const templates = mockTemplates;
+  const isLoading = false;
+  const allOfficialTemplates = mockTemplates;
+  const isAllTemplatesLoading = false;
   const { mutate: createFlow, isPending: isCreateFlowPending } =
     flowHooks.useStartFromScratch(UncategorizedFolderId);
 
+  const [search, setSearch] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('All');
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
   };

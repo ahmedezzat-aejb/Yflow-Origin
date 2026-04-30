@@ -46,7 +46,111 @@ export const AIPieceActionsList: React.FC<AIPieceActionsListProps> = ({
   const isAgentsConfigured = true; // Enable AI actions for Community Edition
   const navigate = useNavigate();
 
-  const aiActions = AI_ACTIONS_METADATA;
+  // Create simple AI actions that work without backend
+  const aiActions = [
+    {
+      displayName: 'Ask AI',
+      logoUrl: '/pieces/new-core/text-ai.svg',
+      description: 'Ask AI for help with text generation',
+      type: FlowActionType.PIECE,
+      actionOrTrigger: {
+        name: 'askAi',
+        displayName: 'Ask AI',
+        description: 'Ask AI for help with text generation',
+      },
+      pieceMetadata: {
+        name: 'ai-agent',
+        displayName: 'AI Agent',
+        description: 'AI Agent for text generation',
+        logoUrl: '/pieces/new-core/text-ai.svg',
+      },
+    },
+    {
+      displayName: 'Generate Image',
+      logoUrl: '/pieces/new-core/image-ai.svg',
+      description: 'Generate images using AI',
+      type: FlowActionType.PIECE,
+      actionOrTrigger: {
+        name: 'generateImage',
+        displayName: 'Generate Image',
+        description: 'Generate images using AI',
+      },
+      pieceMetadata: {
+        name: 'ai-agent',
+        displayName: 'AI Agent',
+        description: 'AI Agent for image generation',
+        logoUrl: '/pieces/new-core/image-ai.svg',
+      },
+    },
+    {
+      displayName: 'Summarize Text',
+      logoUrl: '/pieces/new-core/text-ai.svg',
+      description: 'Summarize long text using AI',
+      type: FlowActionType.PIECE,
+      actionOrTrigger: {
+        name: 'summarizeText',
+        displayName: 'Summarize Text',
+        description: 'Summarize long text using AI',
+      },
+      pieceMetadata: {
+        name: 'ai-agent',
+        displayName: 'AI Agent',
+        description: 'AI Agent for text summarization',
+        logoUrl: '/pieces/new-core/text-ai.svg',
+      },
+    },
+    {
+      displayName: 'Classify Text',
+      logoUrl: '/pieces/new-core/text-ai.svg',
+      description: 'Classify text into categories',
+      type: FlowActionType.PIECE,
+      actionOrTrigger: {
+        name: 'classifyText',
+        displayName: 'Classify Text',
+        description: 'Classify text into categories',
+      },
+      pieceMetadata: {
+        name: 'ai-agent',
+        displayName: 'AI Agent',
+        description: 'AI Agent for text classification',
+        logoUrl: '/pieces/new-core/text-ai.svg',
+      },
+    },
+    {
+      displayName: 'Extract Data',
+      logoUrl: '/pieces/new-core/utility-ai.svg',
+      description: 'Extract structured data from text',
+      type: FlowActionType.PIECE,
+      actionOrTrigger: {
+        name: 'extractStructuredData',
+        displayName: 'Extract Data',
+        description: 'Extract structured data from text',
+      },
+      pieceMetadata: {
+        name: 'ai-agent',
+        displayName: 'AI Agent',
+        description: 'AI Agent for data extraction',
+        logoUrl: '/pieces/new-core/utility-ai.svg',
+      },
+    },
+    {
+      displayName: 'Run Agent',
+      logoUrl: '/pieces/new-core/agent.svg',
+      description: 'Run an AI agent',
+      type: FlowActionType.PIECE,
+      actionOrTrigger: {
+        name: 'run_agent',
+        displayName: 'Run Agent',
+        description: 'Run an AI agent',
+      },
+      pieceMetadata: {
+        name: 'ai-agent',
+        displayName: 'AI Agent',
+        description: 'AI Agent for general tasks',
+        logoUrl: '/pieces/new-core/agent.svg',
+      },
+    },
+  ];
 
   return (
     <ScrollArea className="h-full" viewPortClassName="h-full">
