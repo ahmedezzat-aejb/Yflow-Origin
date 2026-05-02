@@ -144,8 +144,8 @@ const PieceSelectorContent = ({
 
   const { platform } = platformHooks.useCurrentPlatform();
   const tabsList = useMemo(
-    () => getTabsList(operation.type, platform?.plan.embeddingEnabled ?? false),
-    [operation.type, platform?.plan.embeddingEnabled],
+    () => getTabsList(operation.type, false), // Force AI tab to show for Community Edition
+    [operation.type],
   );
 
   return (
