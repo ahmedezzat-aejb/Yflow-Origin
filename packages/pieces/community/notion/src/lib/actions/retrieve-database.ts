@@ -1,7 +1,4 @@
-import {
-  createAction,
-  OAuth2PropertyValue,
-} from '@yflow/pieces-framework';
+import { createAction, OAuth2PropertyValue } from '@yflow/pieces-framework';
 import { Client } from '@notionhq/client';
 import { notionAuth } from '../..';
 import { notionCommon } from '../common';

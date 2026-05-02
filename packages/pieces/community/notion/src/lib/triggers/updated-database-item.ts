@@ -1,8 +1,4 @@
-import {
-  DedupeStrategy,
-  Polling,
-  pollingHelper,
-} from '@yflow/pieces-common';
+import { DedupeStrategy, Polling, pollingHelper } from '@yflow/pieces-common';
 import {
   createTrigger,
   TriggerStrategy,

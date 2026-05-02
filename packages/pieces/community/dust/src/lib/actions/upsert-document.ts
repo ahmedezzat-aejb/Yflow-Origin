@@ -1,9 +1,5 @@
 import { createAction, Property } from '@yflow/pieces-framework';
-import {
-  httpClient,
-  HttpMethod,
-  HttpRequest,
-} from '@yflow/pieces-common';
+import { httpClient, HttpMethod, HttpRequest } from '@yflow/pieces-common';
 import { DUST_BASE_URL } from '../common';
 import { dustAuth, DustAuthType } from '../..';
 import mimeTypes from 'mime-types';

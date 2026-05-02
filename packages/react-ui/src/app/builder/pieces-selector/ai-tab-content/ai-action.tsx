@@ -33,9 +33,15 @@ const AIActionItem = ({
 }: AIActionItemProps) => {
   const pieceSelectorItemInfo = getPieceSelectorItemInfo(item);
 
+  console.log('AI Action Item rendering:', {
+    item,
+    stepMetadataWithSuggestions,
+    pieceSelectorItemInfo
+  });
+
   return (
     <CardListItem
-      className="p-4 w-full h-full rounded-md flex flex-col justify-between h-[125px]"
+      className="p-4 w-full h-full rounded-md flex flex-col justify-between h-[125px] bg-blue-50 border border-blue-200"
       onClick={onClick}
     >
       <div className="flex flex-col gap-3">
@@ -50,6 +56,9 @@ const AIActionItem = ({
         <div className="flex flex-col gap-1 text-center">
           <div className="text-sm font-medium leading-tight">
             {pieceSelectorItemInfo.displayName}
+          </div>
+          <div className="text-xs text-gray-600">
+            {pieceSelectorItemInfo.description}
           </div>
         </div>
       </div>

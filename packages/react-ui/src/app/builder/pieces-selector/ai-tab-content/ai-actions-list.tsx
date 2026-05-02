@@ -152,40 +152,48 @@ export const AIPieceActionsList: React.FC<AIPieceActionsListProps> = ({
     },
   ];
 
+  console.log('AI Actions:', aiActions);
+  console.log('Step Metadata:', stepMetadataWithSuggestions);
+
   return (
     <ScrollArea className="h-full" viewPortClassName="h-full">
-      <div className="grid grid-cols-3 p-2 gap-3 min-w-[350px]">
-        {aiActions.map((item, index) => {
-          const actionIcon = item.logoUrl;
-          return (
-            <AIActionItem
-              key={index}
-              item={item}
-              hidePieceIconAndDescription={hidePieceIconAndDescription}
-              stepMetadataWithSuggestions={{
-                ...stepMetadataWithSuggestions,
-                logoUrl: actionIcon,
-              }}
-              onClick={() => {
-                if (item.type === FlowActionType.PIECE) {
-                  capture({
-                    name: TelemetryEventName.PIECE_SELECTOR_SEARCH,
-                    payload: {
-                      search: searchQuery,
-                      isTrigger: false,
-                      selectedActionOrTriggerName: item.actionOrTrigger.name,
-                    },
+      <div className="p-4">
+        <div className="text-lg font-bold mb-4">AI Actions</div>
+        <div className="grid grid-cols-3 p-2 gap-3 min-w-[350px]">
+          {aiActions.map((item, index) => {
+            console.log('Rendering AI Action:', item);
+            const actionIcon = item.logoUrl;
+            return (
+              <AIActionItem
+                key={index}
+                item={item}
+                hidePieceIconAndDescription={hidePieceIconAndDescription}
+                stepMetadataWithSuggestions={{
+                  ...stepMetadataWithSuggestions,
+                  logoUrl: actionIcon,
+                }}
+                onClick={() => {
+                  console.log('AI Action clicked:', item);
+                  if (item.type === FlowActionType.PIECE) {
+                    capture({
+                      name: TelemetryEventName.PIECE_SELECTOR_SEARCH,
+                      payload: {
+                        search: searchQuery,
+                        isTrigger: false,
+                        selectedActionOrTriggerName: item.actionOrTrigger.name,
+                      },
+                    });
+                  }
+                  handleAddingOrUpdatingStep({
+                    pieceSelectorItem: item,
+                    operation,
+                    selectStepAfter: true,
                   });
-                }
-                handleAddingOrUpdatingStep({
-                  pieceSelectorItem: item,
-                  operation,
-                  selectStepAfter: true,
-                });
-              }}
-            />
-          );
-        })}
+                }}
+              />
+            );
+          })}
+        </div>
       </div>
     </ScrollArea>
   );

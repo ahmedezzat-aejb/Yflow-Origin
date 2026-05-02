@@ -1,9 +1,5 @@
 import { createAction, Property } from '@yflow/pieces-framework';
-import {
-  httpClient,
-  HttpMethod,
-  HttpRequest,
-} from '@yflow/pieces-common';
+import { httpClient, HttpMethod, HttpRequest } from '@yflow/pieces-common';
 import { dustAuth, DustAuthType } from '../..';
 import {
   assistantProp,

@@ -1,9 +1,5 @@
 import { Property } from '@yflow/pieces-framework';
-import {
-  httpClient,
-  HttpMessageBody,
-  HttpMethod,
-} from '@yflow/pieces-common';
+import { httpClient, HttpMessageBody, HttpMethod } from '@yflow/pieces-common';
 import { dustAuth, DustAuthType } from '..';
 import { DustAPI } from '@dust-tt/client';
 

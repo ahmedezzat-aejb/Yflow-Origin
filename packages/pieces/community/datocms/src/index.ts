@@ -1,12 +1,5 @@
-import {
-  createPiece,
-  PieceAuth,
-  Property,
-} from '@yflow/pieces-framework';
-import {
-  createCustomApiCallAction,
-  HttpHeaders,
-} from '@yflow/pieces-common';
+import { createPiece, PieceAuth, Property } from '@yflow/pieces-framework';
+import { createCustomApiCallAction, HttpHeaders } from '@yflow/pieces-common';
 
 export const DATO_BASE_URL = 'https://site-api.datocms.com';
 
