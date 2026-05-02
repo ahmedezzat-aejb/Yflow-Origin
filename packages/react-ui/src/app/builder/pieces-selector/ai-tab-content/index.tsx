@@ -13,12 +13,7 @@ import { AIPieceActionsList } from './ai-actions-list';
 const AITabContent = ({ operation }: { operation: PieceSelectorOperation }) => {
   const { selectedTab } = usePieceSelectorTabs();
 
-  if (
-    selectedTab !== PieceSelectorTabType.AI_AND_AGENTS ||
-    ![FlowOperationType.ADD_ACTION, FlowOperationType.UPDATE_ACTION].includes(
-      operation.type,
-    )
-  ) {
+  if (selectedTab !== PieceSelectorTabType.AI_AND_AGENTS) {
     return null;
   }
 
@@ -65,7 +60,13 @@ const AITabContent = ({ operation }: { operation: PieceSelectorOperation }) => {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full p-4">
+      <div className="text-lg font-bold mb-4">AI Actions Test</div>
+      <div className="bg-blue-100 p-4 rounded">
+        <p>AI Tab is working! This is a test.</p>
+        <p>Operation: {operation.type}</p>
+        <p>Selected Tab: {selectedTab}</p>
+      </div>
       <AIPieceActionsList
         stepMetadataWithSuggestions={pieceMetadataWithSuggestion}
         hidePieceIconAndDescription={false}
