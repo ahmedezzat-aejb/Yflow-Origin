@@ -99,9 +99,7 @@ const ApiKeysPage = () => {
       featureKey="API"
       locked={!platform.plan.apiKeysEnabled}
       lockTitle={t('Enable API Keys')}
-      lockDescription={t(
-        'Create and manage API keys to access YflowAPIs.',
-      )}
+      lockDescription={t('Create and manage API keys to access YflowAPIs.')}
       lockVideoUrl="https://cdn.yflow.ru/videos/showcase/api-keys.mp4"
     >
       <div className="flex-col w-full">

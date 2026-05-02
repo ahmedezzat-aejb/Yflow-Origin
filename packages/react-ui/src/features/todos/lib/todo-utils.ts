@@ -1,8 +1,4 @@
-import {
-  isNil,
-  PopulatedTodo,
-  TodoActivityWithUser,
-} from '@yflow/shared';
+import { isNil, PopulatedTodo, TodoActivityWithUser } from '@yflow/shared';
 
 export const todoUtils = {
   getAuthorName: (todo: PopulatedTodo | TodoActivityWithUser) => {

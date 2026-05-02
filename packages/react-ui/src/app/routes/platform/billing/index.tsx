@@ -28,9 +28,7 @@ import {
 export default function Billing() {
   const { data: edition } = flagsHooks.useFlag<ApEdition>(ApFlagId.EDITION);
 
-  return (
-    <BillingPageDetails />
-  );
+  return <BillingPageDetails />;
 }
 
 const BillingPageDetails = () => {

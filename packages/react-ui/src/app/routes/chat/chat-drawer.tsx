@@ -11,11 +11,7 @@ import {
   DrawerTitle,
 } from '@/components/ui/drawer';
 import { ChatDrawerSource } from '@/lib/types';
-import {
-  FlowRun,
-  RunEnvironment,
-  WebsocketClientEvent,
-} from '@yflow/shared';
+import { FlowRun, RunEnvironment, WebsocketClientEvent } from '@yflow/shared';
 
 import { FlowChat } from './flow-chat';
 

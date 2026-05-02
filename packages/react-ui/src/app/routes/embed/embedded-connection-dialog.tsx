@@ -5,11 +5,7 @@ import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { LoadingSpinner } from '@/components/ui/spinner';
 import { oauthAppsQueries } from '@/features/connections/lib/oauth-apps-hooks';
 import { cn, parentWindow } from '@/lib/utils';
-import {
-  apId,
-  AppConnectionWithoutSensitiveData,
-  isNil,
-} from '@yflow/shared';
+import { apId, AppConnectionWithoutSensitiveData, isNil } from '@yflow/shared';
 import {
   yflowClientConnectionNameIsInvalid,
   yflowClientConnectionPieceNotFound,

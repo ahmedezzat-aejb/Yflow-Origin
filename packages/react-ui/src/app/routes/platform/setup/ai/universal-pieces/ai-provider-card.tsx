@@ -3,10 +3,7 @@ import { Pencil, Trash } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import {
-  AiProviderInfo,
-  AIProviderWithoutSensitiveData,
-} from '@yflow/shared';
+import { AiProviderInfo, AIProviderWithoutSensitiveData } from '@yflow/shared';
 
 import { UpsertAIProviderDialog } from './upsert-provider-dialog';
 

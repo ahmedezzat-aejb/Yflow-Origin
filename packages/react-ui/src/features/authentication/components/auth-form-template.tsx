@@ -11,10 +11,7 @@ import {
 } from '@/components/ui/card';
 import { authenticationSession } from '@/lib/authentication-session';
 import { useRedirectAfterLogin } from '@/lib/navigation-utils';
-import {
-  ApFlagId,
-  ThirdPartyAuthnProvidersToShowMap,
-} from '@yflow/shared';
+import { ApFlagId, ThirdPartyAuthnProvidersToShowMap } from '@yflow/shared';
 
 import { HorizontalSeparatorWithText } from '../../../components/ui/separator';
 import { flagsHooks } from '../../../hooks/flags-hooks';

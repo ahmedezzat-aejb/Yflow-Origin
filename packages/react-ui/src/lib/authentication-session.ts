@@ -1,11 +1,7 @@
 import dayjs from 'dayjs';
 import { jwtDecode } from 'jwt-decode';
 
-import {
-  AuthenticationResponse,
-  isNil,
-  UserPrincipal,
-} from '@yflow/shared';
+import { AuthenticationResponse, isNil, UserPrincipal } from '@yflow/shared';
 
 import { ApStorage } from './ap-browser-storage';
 import { authenticationApi } from './authentication-api';

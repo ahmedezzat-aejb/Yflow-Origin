@@ -5,11 +5,7 @@ import { useSearchParam } from 'react-use';
 import { LoadingScreen } from '@/components/ui/loading-screen';
 import { ApForm } from '@/features/forms/components/ap-form';
 import { humanInputApi } from '@/features/forms/lib/human-input-api';
-import {
-  FormResponse,
-  isNil,
-  USE_DRAFT_QUERY_PARAM_NAME,
-} from '@yflow/shared';
+import { FormResponse, isNil, USE_DRAFT_QUERY_PARAM_NAME } from '@yflow/shared';
 
 import NotFoundPage from '../404-page';
 

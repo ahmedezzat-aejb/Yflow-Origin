@@ -29,11 +29,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { platformHooks } from '@/hooks/platform-hooks';
 import { api } from '@/lib/api';
 import { authenticationSession } from '@/lib/authentication-session';
-import {
-  ConfigureRepoRequest,
-  GitBranchType,
-  GitRepo,
-} from '@yflow/ee-shared';
+import { ConfigureRepoRequest, GitBranchType, GitRepo } from '@yflow/ee-shared';
 import { ApErrorParams, ErrorCode } from '@yflow/shared';
 
 import { gitSyncApi } from '../lib/git-sync-api';

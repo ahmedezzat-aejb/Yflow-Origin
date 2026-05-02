@@ -7,11 +7,7 @@ import { ConnectGitDialog } from '@/features/project-releases/components/connect
 import { gitSyncHooks } from '@/features/project-releases/lib/git-sync-hooks';
 import { projectReleaseApi } from '@/features/project-releases/lib/project-release-api';
 import { authenticationSession } from '@/lib/authentication-session';
-import {
-  DiffReleaseRequest,
-  isNil,
-  ProjectReleaseType,
-} from '@yflow/shared';
+import { DiffReleaseRequest, isNil, ProjectReleaseType } from '@yflow/shared';
 
 import { CreateReleaseDialog } from './create-release-dialog';
 

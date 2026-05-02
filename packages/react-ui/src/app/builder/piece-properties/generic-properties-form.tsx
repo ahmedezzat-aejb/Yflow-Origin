@@ -7,11 +7,7 @@ import {
   PiecePropertyMap,
   ArraySubProps,
 } from '@yflow/pieces-framework';
-import {
-  isNil,
-  PropertyExecutionType,
-  PropertySettings,
-} from '@yflow/shared';
+import { isNil, PropertyExecutionType, PropertySettings } from '@yflow/shared';
 
 import {
   selectGenericFormComponentForProperty,

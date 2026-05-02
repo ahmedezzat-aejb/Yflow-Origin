@@ -9,13 +9,10 @@ export const requestTrialApi = {
   },
   async contactSales(params: ContactSalesRequest): Promise<void> {
     const flags = await flagsApi.getAll();
-    return api.post<void>(
-      `https://sales.yflow.com/submit-inapp-contact-form`,
-      {
-        ...params,
-        flags: flags,
-      },
-    );
+    return api.post<void>(`https://sales.yflow.com/submit-inapp-contact-form`, {
+      ...params,
+      flags: flags,
+    });
   },
 };
 

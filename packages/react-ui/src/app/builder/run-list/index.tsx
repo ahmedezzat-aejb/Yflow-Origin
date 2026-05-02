@@ -12,11 +12,7 @@ import { VirtualizedScrollArea } from '@/components/ui/virtualized-scroll-area';
 import { flowRunsApi } from '@/features/flow-runs/lib/flow-runs-api';
 import { authenticationSession } from '@/lib/authentication-session';
 import { RightSideBarType } from '@/lib/types';
-import {
-  FlowRun,
-  isFlowRunStateTerminal,
-  SeekPage,
-} from '@yflow/shared';
+import { FlowRun, isFlowRunStateTerminal, SeekPage } from '@yflow/shared';
 
 import { SidebarHeader } from '../sidebar-header';
 

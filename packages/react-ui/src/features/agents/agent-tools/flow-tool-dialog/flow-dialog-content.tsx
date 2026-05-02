@@ -5,11 +5,7 @@ import { useDebounce } from 'use-debounce';
 
 import { Checkbox } from '@/components/ui/checkbox';
 import { PieceIconList } from '@/features/pieces/components/piece-icon-list';
-import {
-  AgentFlowTool,
-  AgentToolType,
-  PopulatedFlow,
-} from '@yflow/shared';
+import { AgentFlowTool, AgentToolType, PopulatedFlow } from '@yflow/shared';
 
 import { CreateMcpFlowButton } from './create-mcp-flow-button';
 import { flowDialogUtils } from './flow-dialog-utils';

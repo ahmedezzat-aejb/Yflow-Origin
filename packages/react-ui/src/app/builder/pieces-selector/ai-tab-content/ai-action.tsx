@@ -36,7 +36,7 @@ const AIActionItem = ({
   console.log('AI Action Item rendering:', {
     item,
     stepMetadataWithSuggestions,
-    pieceSelectorItemInfo
+    pieceSelectorItemInfo,
   });
 
   return (

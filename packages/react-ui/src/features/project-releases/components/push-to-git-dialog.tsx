@@ -30,11 +30,7 @@ import {
   PushFlowsGitRepoRequest,
   PushTablesGitRepoRequest,
 } from '@yflow/ee-shared';
-import {
-  assertNotNullOrUndefined,
-  PopulatedFlow,
-  Table,
-} from '@yflow/shared';
+import { assertNotNullOrUndefined, PopulatedFlow, Table } from '@yflow/shared';
 
 import { gitSyncApi } from '../lib/git-sync-api';
 import { gitSyncHooks } from '../lib/git-sync-hooks';

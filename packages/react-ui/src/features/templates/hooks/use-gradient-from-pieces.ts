@@ -3,11 +3,7 @@ import { useMemo } from 'react';
 
 import { stepsHooks } from '@/features/pieces/lib/steps-hooks';
 import { PieceStepMetadata, StepMetadata } from '@/lib/types';
-import {
-  FlowTrigger,
-  flowStructureUtil,
-  PieceCategory,
-} from '@yflow/shared';
+import { FlowTrigger, flowStructureUtil, PieceCategory } from '@yflow/shared';
 
 const rgbToHex = (r: number, g: number, b: number): string => {
   return '#' + [r, g, b].map((x) => x.toString(16).padStart(2, '0')).join('');

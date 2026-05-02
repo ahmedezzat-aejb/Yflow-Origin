@@ -3,12 +3,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { authenticationSession } from '@/lib/authentication-session';
 import { NEW_TABLE_QUERY_PARAM } from '@/lib/utils';
-import {
-  FieldType,
-  SharedTemplate,
-  TableTemplate,
-  Table,
-} from '@yflow/shared';
+import { FieldType, SharedTemplate, TableTemplate, Table } from '@yflow/shared';
 
 import { fieldsApi } from './fields-api';
 import { recordsApi } from './records-api';

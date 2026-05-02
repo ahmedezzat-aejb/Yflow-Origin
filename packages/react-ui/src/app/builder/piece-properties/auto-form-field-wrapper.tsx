@@ -21,11 +21,7 @@ import {
   PieceProperty,
   PropertyType,
 } from '@yflow/pieces-framework';
-import {
-  FlowAction,
-  FlowTrigger,
-  PropertyExecutionType,
-} from '@yflow/shared';
+import { FlowAction, FlowTrigger, PropertyExecutionType } from '@yflow/shared';
 
 import { ArrayPiecePropertyInInlineItemMode } from './array-property-in-inline-item-mode';
 import { TextInputWithMentions } from './text-input-with-mentions';

@@ -1,8 +1,5 @@
 import { api } from '@/lib/api';
-import {
-  ApplicationEvent,
-  ListAuditEventsRequest,
-} from '@yflow/ee-shared';
+import { ApplicationEvent, ListAuditEventsRequest } from '@yflow/ee-shared';
 import { SeekPage } from '@yflow/shared';
 
 export const auditEventsApi = {

@@ -1,8 +1,5 @@
 import { api } from '@/lib/api';
-import {
-  AgentMcpTool,
-  ValidateAgentMcpToolResponse,
-} from '@yflow/shared';
+import { AgentMcpTool, ValidateAgentMcpToolResponse } from '@yflow/shared';
 
 export const mcpToolApi = {
   async validateAgentMcpTool(

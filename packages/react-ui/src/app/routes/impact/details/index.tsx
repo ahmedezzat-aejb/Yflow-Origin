@@ -14,10 +14,7 @@ import {
 import { RefreshAnalyticsContext } from '@/features/platform-admin/lib/refresh-analytics-context';
 import { projectCollectionUtils } from '@/hooks/project-collection';
 import { formatUtils } from '@/lib/utils';
-import {
-  PlatformAnalyticsReport,
-  ProjectWithLimits,
-} from '@yflow/shared';
+import { PlatformAnalyticsReport, ProjectWithLimits } from '@yflow/shared';
 
 import { EditTimeSavedPopover } from './edit-time-saved-popover';
 import { FlowDetailsHeader } from './flow-details-header';

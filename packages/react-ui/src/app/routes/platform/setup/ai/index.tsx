@@ -5,11 +5,7 @@ import { DashboardPageHeader } from '@/app/components/dashboard-page-header';
 import { aiProviderApi } from '@/features/platform-admin/lib/ai-provider-api';
 import { flagsHooks } from '@/hooks/flags-hooks';
 import { userHooks } from '@/hooks/user-hooks';
-import {
-  PlatformRole,
-  ApFlagId,
-  SUPPORTED_AI_PROVIDERS,
-} from '@yflow/shared';
+import { PlatformRole, ApFlagId, SUPPORTED_AI_PROVIDERS } from '@yflow/shared';
 
 import LockedFeatureGuard from '../../../../components/locked-feature-guard';
 

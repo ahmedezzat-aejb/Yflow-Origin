@@ -25,11 +25,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { platformUserApi } from '@/lib/platform-user-api';
-import {
-  PlatformRole,
-  UpdateUserRequestBody,
-  User,
-} from '@yflow/shared';
+import { PlatformRole, UpdateUserRequestBody, User } from '@yflow/shared';
 
 export const UpdateUserDialog = ({
   children,

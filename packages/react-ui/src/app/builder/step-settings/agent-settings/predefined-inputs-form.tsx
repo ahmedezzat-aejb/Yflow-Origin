@@ -18,11 +18,7 @@ import { ConnectionDropdown } from '@/features/agents/agent-tools/piece-tool-dia
 import { usePieceToolsDialogStore } from '@/features/agents/agent-tools/stores/pieces-tools';
 import { piecesHooks } from '@/features/pieces/lib/pieces-hooks';
 import { PieceProperty, PropertyType } from '@yflow/pieces-framework';
-import {
-  FieldControlMode,
-  isNil,
-  PredefinedInputField,
-} from '@yflow/shared';
+import { FieldControlMode, isNil, PredefinedInputField } from '@yflow/shared';
 
 import { selectGenericFormComponentForProperty } from '../../piece-properties/properties-utils';
 

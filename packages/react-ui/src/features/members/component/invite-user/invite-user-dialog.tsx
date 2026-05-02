@@ -11,31 +11,31 @@ import { toast } from 'sonner';
 import { useEmbedding } from '@/components/embed-provider';
 import { Button } from '@/components/ui/button';
 import {
-    Dialog,
-    DialogClose,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
 } from '@/components/ui/dialog';
 import { Form, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import {
-    Select,
-    SelectContent,
-    SelectGroup,
-    SelectItem,
-    SelectLabel,
-    SelectTrigger,
-    SelectValue,
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
 } from '@/components/ui/select';
 import { TagInput } from '@/components/ui/tag-input';
 import {
-    Tooltip,
-    TooltipContent,
-    TooltipTrigger,
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { PlatformRoleSelect } from '@/features/members/component/platform-role-select';
 import { userInvitationApi } from '@/features/members/lib/user-invitation';
@@ -46,12 +46,12 @@ import { projectCollectionUtils } from '@/hooks/project-collection';
 import { HttpError } from '@/lib/api';
 import { formatUtils } from '@/lib/utils';
 import {
-    InvitationType,
-    isNil,
-    Permission,
-    PlatformRole,
-    ProjectType,
-    UserInvitationWithLink,
+  InvitationType,
+  isNil,
+  Permission,
+  PlatformRole,
+  ProjectType,
+  UserInvitationWithLink,
 } from '@yflow/shared';
 
 import { userInvitationsHooks } from '../../lib/user-invitations-hooks';
@@ -315,9 +315,13 @@ export const InviteUserDialog = ({
                               placeholder={t('Invite users by email')}
                               onChange={(emails) => {
                                 field.onChange(emails);
-                                const lastEmail = emails[emails.length - 1] || '';
+                                const lastEmail =
+                                  emails[emails.length - 1] || '';
                                 setInputValue(lastEmail);
-                                setShowSuggestions(lastEmail.trim().length > 0 && !isPlatformPage);
+                                setShowSuggestions(
+                                  lastEmail.trim().length > 0 &&
+                                    !isPlatformPage,
+                                );
                               }}
                             />
                           </div>

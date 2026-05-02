@@ -1,9 +1,6 @@
 import { useCallback, useEffect } from 'react';
 
-import {
-  flowStructureUtil,
-  StepLocationRelativeToParent,
-} from '@yflow/shared';
+import { flowStructureUtil, StepLocationRelativeToParent } from '@yflow/shared';
 
 import { useBuilderStateContext } from './builder-hooks';
 import { CanvasShortcutsProps } from './flow-canvas/context-menu/canvas-context-menu';

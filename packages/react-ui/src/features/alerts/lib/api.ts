@@ -1,9 +1,5 @@
 import { api } from '@/lib/api';
-import {
-  Alert,
-  CreateAlertParams,
-  ListAlertsParams,
-} from '@yflow/ee-shared';
+import { Alert, CreateAlertParams, ListAlertsParams } from '@yflow/ee-shared';
 import { SeekPage } from '@yflow/shared';
 
 export const alertsApi = {

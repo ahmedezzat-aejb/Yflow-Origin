@@ -30,7 +30,7 @@ const ButtonContainer = styled.button<{
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
   width: ${({ fullWidth }) => (fullWidth ? '100%' : 'auto')};
-  
+
   /* Size Variants */
   ${({ size }) => {
     switch (size) {
@@ -54,7 +54,7 @@ const ButtonContainer = styled.button<{
         `;
     }
   }}
-  
+
   /* Variant Styles */
   ${({ variant }) => {
     switch (variant) {
@@ -118,10 +118,10 @@ const ButtonContainer = styled.button<{
   
   /* Loading State */
   position: relative;
-  
+
   &.loading {
     color: transparent;
-    
+
     &::after {
       content: '';
       position: absolute;
@@ -133,10 +133,14 @@ const ButtonContainer = styled.button<{
       animation: spin 1s linear infinite;
     }
   }
-  
+
   @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 `;
 

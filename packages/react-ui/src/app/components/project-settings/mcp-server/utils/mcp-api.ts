@@ -1,8 +1,5 @@
 import { api } from '@/lib/api';
-import {
-  PopulatedMcpServer,
-  UpdateMcpServerRequest,
-} from '@yflow/shared';
+import { PopulatedMcpServer, UpdateMcpServerRequest } from '@yflow/shared';
 
 export const mcpApi = {
   async get(projectId: string): Promise<PopulatedMcpServer> {

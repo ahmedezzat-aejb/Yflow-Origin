@@ -1,11 +1,7 @@
 import { cva } from 'class-variance-authority';
 import { t } from 'i18next';
 
-import {
-  FlowTrigger,
-  flowStructureUtil,
-  PieceCategory,
-} from '@yflow/shared';
+import { FlowTrigger, flowStructureUtil, PieceCategory } from '@yflow/shared';
 
 import {
   Tooltip,

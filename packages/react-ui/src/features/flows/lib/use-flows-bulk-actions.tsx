@@ -15,11 +15,7 @@ import { useAuthorization } from '@/hooks/authorization-hooks';
 import { platformHooks } from '@/hooks/platform-hooks';
 import { authenticationSession } from '@/lib/authentication-session';
 import { GitBranchType } from '@yflow/ee-shared';
-import {
-  FlowVersionState,
-  Permission,
-  PopulatedFlow,
-} from '@yflow/shared';
+import { FlowVersionState, Permission, PopulatedFlow } from '@yflow/shared';
 
 import { MoveFlowDialog } from '../components/move-flow-dialog';
 

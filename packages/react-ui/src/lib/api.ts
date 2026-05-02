@@ -1,4 +1,3 @@
-import { ApErrorParams, ErrorCode, isNil } from '@yflow/shared';
 import axios, {
   AxiosError,
   AxiosRequestConfig,
@@ -7,6 +6,8 @@ import axios, {
   isAxiosError,
 } from 'axios';
 import qs from 'qs';
+
+import { ApErrorParams, ErrorCode, isNil } from '@yflow/shared';
 
 import { authenticationSession } from './authentication-session';
 
