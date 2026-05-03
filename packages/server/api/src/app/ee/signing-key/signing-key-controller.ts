@@ -1,17 +1,17 @@
+import {
+    FastifyPluginAsyncTypebox,
+    Type,
+} from '@fastify/type-provider-typebox'
 import { AddSigningKeyRequestBody, ApplicationEventName } from '@yflow/ee-shared'
 import { securityAccess } from '@yflow/server-shared'
 import {
-    yflowError,
     ApId,
     assertNotNullOrUndefined,
     ErrorCode,
     isNil,
     PrincipalType,
+    yflowError,
 } from '@yflow/shared'
-import {
-    FastifyPluginAsyncTypebox,
-    Type,
-} from '@fastify/type-provider-typebox'
 import { StatusCodes } from 'http-status-codes'
 import { applicationEvents } from '../../helper/application-events'
 import { signingKeyService } from './signing-key-service'

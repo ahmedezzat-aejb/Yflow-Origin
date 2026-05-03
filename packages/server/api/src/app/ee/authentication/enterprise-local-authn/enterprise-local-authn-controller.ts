@@ -1,8 +1,8 @@
+import { FastifyPluginAsyncTypebox } from '@fastify/type-provider-typebox'
 import {
     ResetPasswordRequestBody,
     VerifyEmailRequestBody } from '@yflow/ee-shared'
 import { securityAccess } from '@yflow/server-shared'
-import { FastifyPluginAsyncTypebox } from '@fastify/type-provider-typebox'
 import { enterpriseLocalAuthnService } from './enterprise-local-authn-service'
 
 export const enterpriseLocalAuthnController: FastifyPluginAsyncTypebox = async (

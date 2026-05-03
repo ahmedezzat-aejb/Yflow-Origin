@@ -1,5 +1,5 @@
-import { AIProvider, AIProviderConfig, AIProviderName, Platform } from '@yflow/shared'
 import { Static, Type } from '@sinclair/typebox'
+import { AIProvider, AIProviderConfig, AIProviderName, Platform } from '@yflow/shared'
 import { EntitySchema } from 'typeorm'
 import { ApIdSchema, BaseColumnSchemaPart } from '../database/database-common'
 import { EncryptedObject } from '../helper/encryption'

@@ -1,5 +1,5 @@
 import { exceptionHandler } from '@yflow/server-shared'
-import { yflowError, ErrorCode } from '@yflow/shared'
+import { ErrorCode, yflowError } from '@yflow/shared'
 import { FastifyError, FastifyReply, FastifyRequest } from 'fastify'
 import { StatusCodes } from 'http-status-codes'
 

@@ -1,6 +1,5 @@
 import { PropertyType } from '@yflow/pieces-framework'
-import { yflowError,
-    AppConnection,
+import { AppConnection,
     AppConnectionType,
     assertNotNullOrUndefined,
     BaseOAuth2ConnectionValue,
@@ -9,6 +8,7 @@ import { yflowError,
     OAuth2GrantType,
     PlatformId,
     resolveValueFromProps,
+    yflowError,
 } from '@yflow/shared'
 import { isAxiosError } from 'axios'
 import { FastifyBaseLogger } from 'fastify'

@@ -1,7 +1,7 @@
+import { FastifyPluginAsyncTypebox, Type } from '@fastify/type-provider-typebox'
 import { CreatePlatformEventDestinationRequestBody, EventDestination, ListPlatformEventDestinationsRequestBody, TestPlatformEventDestinationRequestBody, UpdatePlatformEventDestinationRequestBody } from '@yflow/ee-shared'
 import { securityAccess } from '@yflow/server-shared'
 import { PrincipalType, SeekPage } from '@yflow/shared'
-import { FastifyPluginAsyncTypebox, Type } from '@fastify/type-provider-typebox'
 import { StatusCodes } from 'http-status-codes'
 import { eventDestinationService } from '../../event-destinations/event-destinations.service'
 

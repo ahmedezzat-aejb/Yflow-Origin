@@ -3,7 +3,7 @@ import {
     CustomDomainStatus,
     ListCustomDomainsRequest,
 } from '@yflow/ee-shared'
-import { yflowError, ApEdition, apId, ErrorCode, isNil, SeekPage } from '@yflow/shared'
+import { ApEdition, apId, ErrorCode, isNil, SeekPage, yflowError } from '@yflow/shared'
 import { repoFactory } from '../../core/db/repo-factory'
 import { buildPaginator } from '../../helper/pagination/build-paginator'
 import { paginationHelper } from '../../helper/pagination/pagination-utils'

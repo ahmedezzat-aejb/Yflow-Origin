@@ -10,8 +10,7 @@ import {
     UpsertSigningKeyConnection,
 } from '@yflow/ee-shared'
 import {
-    yflowError, apId,
-    AppConnectionScope,
+    apId, AppConnectionScope,
     AppConnectionType,
     AppConnectionWithoutSensitiveData,
     Cursor,
@@ -19,6 +18,7 @@ import {
     isNil,
     ProjectId,
     SeekPage,
+    yflowError,
 } from '@yflow/shared'
 import { FastifyBaseLogger } from 'fastify'
 import jsonwebtoken from 'jsonwebtoken'

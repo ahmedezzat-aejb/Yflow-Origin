@@ -175,8 +175,7 @@ function migrateModel(provider: string | undefined, modelId: string): { model: s
         }
     }
     return {
-        provider: AIProviderName.yflow,
+        provider: AIProviderName.YFLOW,
         model: `${provider.toLocaleLowerCase()}/${modelIdToOpenRouter[modelId] ?? modelId}`,
     }
 }
-

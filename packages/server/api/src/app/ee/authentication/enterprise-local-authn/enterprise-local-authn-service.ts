@@ -5,7 +5,7 @@ import {
     ResetPasswordRequestBody,
     VerifyEmailRequestBody,
 } from '@yflow/ee-shared'
-import { yflowError, ErrorCode, isNil, UserId, UserIdentity } from '@yflow/shared'
+import { ErrorCode, isNil, UserId, UserIdentity, yflowError } from '@yflow/shared'
 import { FastifyBaseLogger } from 'fastify'
 import { userIdentityService } from '../../../authentication/user-identity/user-identity-service'
 import { applicationEvents } from '../../../helper/application-events'

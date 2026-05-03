@@ -1,6 +1,7 @@
+import { FastifyPluginAsyncTypebox } from '@fastify/type-provider-typebox'
+import { Static, Type } from '@sinclair/typebox'
 import { securityAccess } from '@yflow/server-shared'
 import {
-    yflowError,
     ALL_PRINCIPAL_TYPES,
     ApEdition,
     ApFlagId,
@@ -14,9 +15,8 @@ import {
     Template,
     TemplateType,
     UpdateTemplateRequestBody,
+    yflowError,
 } from '@yflow/shared'
-import { FastifyPluginAsyncTypebox } from '@fastify/type-provider-typebox'
-import { Static, Type } from '@sinclair/typebox'
 import { FastifyBaseLogger } from 'fastify'
 import { StatusCodes } from 'http-status-codes'
 import { platformMustBeOwnedByCurrentUser } from '../ee/authentication/ee-authorization'

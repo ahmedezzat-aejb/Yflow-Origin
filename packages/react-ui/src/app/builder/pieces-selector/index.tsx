@@ -1,3 +1,4 @@
+import { FlowOperationType, FlowTriggerType } from '@yflow/shared';
 import { t } from 'i18next';
 import {
   CheckCircle2Icon,
@@ -8,6 +9,16 @@ import {
 } from 'lucide-react';
 import React, { useEffect, useMemo, useRef } from 'react';
 import { useDebounce } from 'use-debounce';
+
+import {
+  PieceSearchProvider,
+  usePieceSearchContext,
+} from '../../../features/pieces/lib/piece-search-context';
+
+import { AITabContent } from './ai-tab-content';
+import { ApprovalsTabContent } from './approvals-tab-content';
+import { ExploreTabContent } from './explore-tab-content';
+import { PiecesCardList } from './pieces-card-list';
 
 import { useBuilderStateContext } from '@/app/builder/builder-hooks';
 import {
@@ -26,17 +37,6 @@ import { pieceSelectorUtils } from '@/features/pieces/lib/piece-selector-utils';
 import { platformHooks } from '@/hooks/platform-hooks';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { PieceSelectorOperation } from '@/lib/types';
-import { FlowOperationType, FlowTriggerType } from '@yflow/shared';
-
-import {
-  PieceSearchProvider,
-  usePieceSearchContext,
-} from '../../../features/pieces/lib/piece-search-context';
-
-import { AITabContent } from './ai-tab-content';
-import { ApprovalsTabContent } from './approvals-tab-content';
-import { ExploreTabContent } from './explore-tab-content';
-import { PiecesCardList } from './pieces-card-list';
 
 const getTabsList = (
   operationType: FlowOperationType,
@@ -144,8 +144,8 @@ const PieceSelectorContent = ({
 
   const { platform } = platformHooks.useCurrentPlatform();
   const tabsList = useMemo(
-    () => getTabsList(operation.type, false), // Force AI tab to show for Community Edition
-    [operation.type],
+    () => getTabsList(operation.type, platform?.plan.embeddingEnabled ?? false),
+    [operation.type, platform?.plan.embeddingEnabled],
   );
 
   return (

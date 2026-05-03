@@ -1,6 +1,6 @@
+import { FastifyPluginAsyncTypebox } from '@fastify/type-provider-typebox'
 import { securityAccess } from '@yflow/server-shared'
 import { GetSystemHealthChecksResponse, PrincipalType } from '@yflow/shared'
-import { FastifyPluginAsyncTypebox } from '@fastify/type-provider-typebox'
 import { StatusCodes } from 'http-status-codes'
 import { healthStatusService } from './health.service'
 

@@ -22,23 +22,23 @@ export const yookassaHelper = (log: FastifyBaseLogger) => ({
             body: JSON.stringify({
                 amount: {
                     value: amount,
-                    currency: 'RUB'
+                    currency: 'RUB',
                 },
                 payment_method_data: {
-                    type: 'bank_card'
+                    type: 'bank_card',
                 },
                 confirmation: {
                     type: 'redirect',
-                    return_url: `${frontendUrl}/platform/billing/success`
+                    return_url: `${frontendUrl}/platform/billing/success`,
                 },
                 description,
                 metadata: {
                     platformId,
                     userId: user.id,
-                    userEmail: user.email
+                    userEmail: user.email,
                 },
-                capture: true
-            })
+                capture: true,
+            }),
         })
         
         const payment = await response.json()
@@ -59,24 +59,24 @@ export const yookassaHelper = (log: FastifyBaseLogger) => ({
             body: JSON.stringify({
                 amount: {
                     value: amount,
-                    currency: 'RUB'
+                    currency: 'RUB',
                 },
                 payment_method_data: {
-                    type: 'sbp'
+                    type: 'sbp',
                 },
                 confirmation: {
                     type: 'redirect',
-                    return_url: `${frontendUrl}/platform/billing/success`
+                    return_url: `${frontendUrl}/platform/billing/success`,
                 },
                 description,
                 metadata: {
                     platformId,
                     userId: user.id,
                     userEmail: user.email,
-                    paymentType: 'SBP'
+                    paymentType: 'SBP',
                 },
-                capture: true
-            })
+                capture: true,
+            }),
         })
         
         const payment = await response.json()
@@ -92,10 +92,10 @@ export const yookassaHelper = (log: FastifyBaseLogger) => ({
             headers: {
                 'Authorization': `Basic ${Buffer.from(`${yookassaShopId}:${yookassaApiKey}`).toString('base64')}`,
                 'Content-Type': 'application/json',
-            }
+            },
         })
         
-        return await response.json()
+        return response.json()
     },
 
     verifyWebhook(payload: string, signature: string): boolean {
@@ -105,10 +105,10 @@ export const yookassaHelper = (log: FastifyBaseLogger) => ({
         hmac.update(payload)
         const expectedSignature = hmac.digest('hex')
         return signature === expectedSignature
-    }
+    },
 })
 
-interface CreateAICreditAutoTopUpCheckoutSessionParams {
+type CreateAICreditAutoTopUpCheckoutSessionParams = {
     platformId: string
     amount: number
     description: string

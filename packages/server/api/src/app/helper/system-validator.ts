@@ -141,6 +141,13 @@ const systemPropValidators: {
     [AppSystemProp.FIREBASE_HASH_PARAMETERS]: stringValidator,
     [AppSystemProp.STRIPE_SECRET_KEY]: stringValidator,
     [AppSystemProp.STRIPE_WEBHOOK_SECRET]: stringValidator,
+    [AppSystemProp.SBERBANK_API_KEY]: stringValidator,
+    [AppSystemProp.SBERBANK_MERCHANT_ID]: stringValidator,
+    [AppSystemProp.SBERBANK_WEBHOOK_SECRET]: stringValidator,
+    [AppSystemProp.SBERBANK_BASE_URL]: urlValidator,
+    [AppSystemProp.YOOKASSA_API_KEY]: stringValidator,
+    [AppSystemProp.YOOKASSA_SHOP_ID]: stringValidator,
+    [AppSystemProp.YOOKASSA_WEBHOOK_SECRET]: stringValidator,
     [AppSystemProp.INTERNAL_URL]: stringValidator,
     [AppSystemProp.PM2_ENABLED]: booleanValidator,
     [AppSystemProp.EDITION]: enumValidator(Object.values(ApEdition)),
@@ -202,7 +209,7 @@ export const validateEnvPropsOnStartup = async (log: FastifyBaseLogger): Promise
 
     const environment = system.get(AppSystemProp.ENVIRONMENT)
     const fileStorageLocation = process.env.AP_FILE_STORAGE_LOCATION
-    
+
     if (environment !== ApEnvironment.TESTING && fileStorageLocation === FileLocation.S3) {
         try {
             await s3Helper(log).validateS3Configuration()

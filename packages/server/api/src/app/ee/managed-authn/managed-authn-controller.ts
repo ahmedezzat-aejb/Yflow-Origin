@@ -1,9 +1,9 @@
+import { FastifyPluginAsyncTypebox } from '@fastify/type-provider-typebox'
 import { ApplicationEventName, ManagedAuthnRequestBody } from '@yflow/ee-shared'
 import { securityAccess } from '@yflow/server-shared'
 import {
     AuthenticationResponse,
 } from '@yflow/shared'
-import { FastifyPluginAsyncTypebox } from '@fastify/type-provider-typebox'
 import { applicationEvents } from '../../helper/application-events'
 import { managedAuthnService } from './managed-authn-service'
 

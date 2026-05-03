@@ -1,3 +1,4 @@
+import { faker } from '@faker-js/faker'
 import {
     ApiKeyResponseWithValue,
     UpdateProjectPlatformRequest,
@@ -10,7 +11,6 @@ import {
     Project,
     User,
 } from '@yflow/shared'
-import { faker } from '@faker-js/faker'
 import { FastifyInstance } from 'fastify'
 import { StatusCodes } from 'http-status-codes'
 import { initializeDatabase } from '../../../../src/app/database'

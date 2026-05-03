@@ -1,6 +1,6 @@
+import { FastifyPluginAsyncTypebox } from '@fastify/type-provider-typebox'
 import { securityAccess } from '@yflow/server-shared'
 import { PrincipalType, WebsocketServerEvent, WorkerMachineHealthcheckRequest } from '@yflow/shared'
-import { FastifyPluginAsyncTypebox } from '@fastify/type-provider-typebox'
 import { websocketService } from '../../core/websockets.service'
 import { machineService } from './machine-service'
 

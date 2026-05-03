@@ -1,6 +1,6 @@
+import { faker } from '@faker-js/faker'
 import { SigningKeyId } from '@yflow/ee-shared'
 import { apId, DefaultProjectRole, Principal } from '@yflow/shared'
-import { faker } from '@faker-js/faker'
 import jwt, { Algorithm, JwtPayload, SignOptions } from 'jsonwebtoken'
 import {
     ExternalPrincipal,

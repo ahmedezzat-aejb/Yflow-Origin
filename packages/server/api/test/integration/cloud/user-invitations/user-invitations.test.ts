@@ -1,8 +1,8 @@
+import { faker } from '@faker-js/faker'
 import {
     ApiKeyResponseWithValue,
 } from '@yflow/ee-shared'
 import { DefaultProjectRole, InvitationStatus, InvitationType, Platform, PlatformRole, PrincipalType, Project, ProjectRole, ProjectType, SendUserInvitationRequest, User } from '@yflow/shared'
-import { faker } from '@faker-js/faker'
 import { FastifyBaseLogger, FastifyInstance } from 'fastify'
 import { StatusCodes } from 'http-status-codes'
 import { initializeDatabase } from '../../../../src/app/database'

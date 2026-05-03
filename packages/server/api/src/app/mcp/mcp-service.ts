@@ -1,6 +1,6 @@
+import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
 import { rejectedPromiseHandler } from '@yflow/server-shared'
 import { apId, FlowStatus, FlowTriggerType, FlowVersionState, isNil, MCP_TRIGGER_PIECE_NAME, McpProperty, McpPropertyType, McpServer as McpServerSchema, McpServerStatus, McpTrigger, PopulatedFlow, PopulatedMcpServer, TelemetryEventName } from '@yflow/shared'
-import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
 import { FastifyBaseLogger } from 'fastify'
 import { z } from 'zod'
 import { repoFactory } from '../core/db/repo-factory'

@@ -1,6 +1,9 @@
+import {
+    FastifyPluginAsyncTypebox,
+    Type,
+} from '@fastify/type-provider-typebox'
 import { securityAccess } from '@yflow/server-shared'
 import {
-    yflowError,
     ApEdition,
     ApId,
     assertNotNullOrUndefined,
@@ -10,11 +13,8 @@ import {
     PrincipalType,
     SERVICE_KEY_SECURITY_OPENAPI,
     UpdatePlatformRequestBody,
+    yflowError,
 } from '@yflow/shared'
-import {
-    FastifyPluginAsyncTypebox,
-    Type,
-} from '@fastify/type-provider-typebox'
 import { StatusCodes } from 'http-status-codes'
 import { userIdentityRepository } from '../authentication/user-identity/user-identity-service'
 import { transaction } from '../core/db/transaction'

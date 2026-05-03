@@ -1,6 +1,6 @@
+import { FastifyPluginAsyncTypebox, Type } from '@fastify/type-provider-typebox'
 import { securityAccess } from '@yflow/server-shared'
 import { assertNotNullOrUndefined, ListTagsRequest, PrincipalType, SeekPage, SetPieceTagsRequest, Tag, UpsertTagRequest } from '@yflow/shared'
-import { FastifyPluginAsyncTypebox, Type } from '@fastify/type-provider-typebox'
 import { StatusCodes } from 'http-status-codes'
 import { pieceTagService } from './pieces/piece-tag.service'
 import { tagService } from './tag-service'

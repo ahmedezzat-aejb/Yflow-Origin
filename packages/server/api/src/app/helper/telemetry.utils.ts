@@ -1,6 +1,6 @@
+import { Analytics } from '@segment/analytics-node'
 import { AppSystemProp, apVersionUtil } from '@yflow/server-shared'
 import { ProjectId, TelemetryEvent, User, UserId, UserIdentity } from '@yflow/shared'
-import { Analytics } from '@segment/analytics-node'
 import { FastifyBaseLogger } from 'fastify'
 import { platformService } from '../platform/platform.service'
 import { projectService } from '../project/project-service'

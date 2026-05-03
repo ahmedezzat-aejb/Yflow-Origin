@@ -1,8 +1,8 @@
 import { readdir, readFile, stat } from 'node:fs/promises'
+import { createRequire } from 'node:module'
 import { join, resolve } from 'node:path'
 import { cwd } from 'node:process'
 import { sep } from 'path'
-const importFresh = require('import-fresh')
 import { Piece, PieceMetadata, pieceTranslation } from '@yflow/pieces-framework'
 import { extractPieceFromModule } from '@yflow/shared'
 import clearModule from 'clear-module'
@@ -11,6 +11,11 @@ import { AppSystemProp, environmentVariables } from '../system-props'
 
 const DIST_PIECES_PATH = resolve(cwd(), 'dist', 'packages', 'pieces')
 const SOURCE_PIECES_PATH = resolve(cwd(), 'packages', 'pieces')
+const requireFresh = createRequire(__filename)
+const importFresh = <T>(modulePath: string): T => {
+    clearModule(modulePath)
+    return requireFresh(modulePath) as T
+}
 
 export const filePiecesUtils = (log: FastifyBaseLogger) => ({
 

@@ -1,14 +1,14 @@
 import {
+    FastifyPluginAsyncTypebox,
+    Static,
+    Type,
+} from '@fastify/type-provider-typebox'
+import {
     AddDomainRequest,
     ListCustomDomainsRequest,
 } from '@yflow/ee-shared'
 import { securityAccess } from '@yflow/server-shared'
 import { assertNotNullOrUndefined, PrincipalType } from '@yflow/shared'
-import {
-    FastifyPluginAsyncTypebox,
-    Static,
-    Type,
-} from '@fastify/type-provider-typebox'
 import { HttpStatusCode } from 'axios'
 import { StatusCodes } from 'http-status-codes'
 import { platformMustHaveFeatureEnabled } from '../authentication/ee-authorization'

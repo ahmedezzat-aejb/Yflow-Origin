@@ -1,3 +1,4 @@
+import { faker } from '@faker-js/faker'
 import {
     ApiKey,
     ApplicationEvent,
@@ -72,7 +73,6 @@ import {
     UserInvitation,
     UserStatus,
 } from '@yflow/shared'
-import { faker } from '@faker-js/faker'
 import bcrypt from 'bcrypt'
 import dayjs from 'dayjs'
 import { AIProviderSchema } from '../../../src/app/ai/ai-provider-entity'

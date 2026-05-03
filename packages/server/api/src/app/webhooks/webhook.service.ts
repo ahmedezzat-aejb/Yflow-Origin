@@ -1,6 +1,6 @@
+import { trace } from '@opentelemetry/api'
 import { pinoLogging } from '@yflow/server-shared'
 import { apId, EngineHttpResponse, EventPayload, FlowRun, FlowStatus, isNil, RunEnvironment, TriggerPayload } from '@yflow/shared'
-import { trace } from '@opentelemetry/api'
 import { FastifyBaseLogger } from 'fastify'
 import { StatusCodes } from 'http-status-codes'
 import { flowExecutionCache } from '../flows/flow/flow-execution-cache'

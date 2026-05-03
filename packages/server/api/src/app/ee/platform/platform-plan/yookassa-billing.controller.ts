@@ -1,16 +1,17 @@
-import { ApSubscriptionStatus, STANDARD_CLOUD_PLAN } from '@yflow/ee-shared'
-import { AppSystemProp, exceptionHandler, securityAccess } from '@yflow/server-shared'
-import { isNil, PlanName } from '@yflow/shared'
 import { FastifyPluginAsyncTypebox } from '@fastify/type-provider-typebox'
+import { STANDARD_CLOUD_PLAN } from '@yflow/ee-shared'
+import { exceptionHandler, securityAccess } from '@yflow/server-shared'
+import { PrincipalType, TeamProjectsLimit } from '@yflow/shared'
 import { FastifyRequest } from 'fastify'
 import { StatusCodes } from 'http-status-codes'
-import { system } from '../../../helper/system/system'
 import { platformAiCreditsService } from './platform-ai-credits.service'
 import { platformPlanService } from './platform-plan.service'
+import { StripeCheckoutType } from './stripe-helper'
 import { yookassaHelper } from './yookassa-helper'
 
 const WebhookRequest = {
     config: {
+        security: securityAccess.public(),
         allowedHttpMethods: ['POST'],
     },
     schema: {
@@ -39,48 +40,47 @@ export const yookassaBillingController: FastifyPluginAsyncTypebox = async (fasti
                     return await reply.status(StatusCodes.BAD_REQUEST).send({ error: 'Invalid signature' })
                 }
 
-                const event = request.body as any
+                const event = request.body as YooKassaWebhookEvent
                 const payment = event.object
 
                 switch (event.event) {
                     case 'payment.succeeded': {
-                        if (isNil(payment.metadata)) {
+                        if (!payment.metadata) {
                             break
                         }
 
                         const platformId = payment.metadata.platformId as string
                         const amount = parseFloat(payment.amount.value)
-                        const paymentType = payment.metadata.paymentType || 'CARD'
-
                         if (payment.metadata.type === 'AI_CREDIT_PAYMENT') {
                             await platformAiCreditsService(request.log).aiCreditsPaymentSucceeded(
                                 platformId, 
                                 amount, 
-                                'AI_CREDIT_PAYMENT'
+                                StripeCheckoutType.AI_CREDIT_PAYMENT,
                             )
-                        } else {
-                            // Handle subscription payment
-                            await platformPlanService(request.log).handleSuccessfulPayment(
+                        }
+                        else {
+                            await platformPlanService(request.log).update({
                                 platformId,
-                                amount,
-                                paymentType
-                            )
+                                ...STANDARD_CLOUD_PLAN,
+                                teamProjectsLimit: TeamProjectsLimit.UNLIMITED,
+                            })
                         }
                         break
                     }
                     case 'payment.canceled': {
                         const platformId = payment.metadata?.platformId as string
                         if (platformId) {
-                            await platformPlanService(request.log).handlePaymentCanceled(platformId)
+                            request.log.info({ platformId }, 'YooKassa payment was canceled')
                         }
                         break
                     }
                 }
 
                 return await reply.status(StatusCodes.OK).send({ received: true })
-            } catch (error) {
+            }
+            catch (error) {
                 exceptionHandler.handle(error, request.log)
-                return await reply.status(StatusCodes.INTERNAL_SERVER_ERROR).send({
+                return reply.status(StatusCodes.INTERNAL_SERVER_ERROR).send({
                     error: 'Internal server error',
                 })
             }
@@ -91,7 +91,7 @@ export const yookassaBillingController: FastifyPluginAsyncTypebox = async (fasti
         '/yookassa/create-payment-session',
         {
             config: {
-                allowedHttpMethods: ['POST'],
+                security: securityAccess.platformAdminOnly([PrincipalType.USER]),
             },
             schema: {
                 description: 'Create YooKassa payment session',
@@ -111,11 +111,8 @@ export const yookassaBillingController: FastifyPluginAsyncTypebox = async (fasti
         },
         async (request: FastifyRequest, reply) => {
             try {
-                const { platformId, amount, description, paymentMethod, type } = request.body as any
+                const { platformId, amount, description, paymentMethod } = request.body as CreateYooKassaPaymentSessionBody
                 
-                securityAccess.throwUnlessPlatformAdmin(request)
-
-                const platformBilling = await platformPlanService(request.log).getOrCreateForPlatform(platformId)
                 const user = request.principal
 
                 let paymentUrl: string
@@ -125,14 +122,15 @@ export const yookassaBillingController: FastifyPluginAsyncTypebox = async (fasti
                         user,
                         platformId,
                         amount,
-                        description
+                        description,
                     )
-                } else {
+                }
+                else {
                     paymentUrl = await yookassaHelper(request.log).createPayment(
                         user,
                         platformId,
                         amount,
-                        description
+                        description,
                     )
                 }
 
@@ -140,14 +138,35 @@ export const yookassaBillingController: FastifyPluginAsyncTypebox = async (fasti
                     paymentUrl,
                     paymentMethod,
                     amount,
-                    currency: 'RUB'
+                    currency: 'RUB',
                 })
-            } catch (error) {
+            }
+            catch (error) {
                 exceptionHandler.handle(error, request.log)
-                return await reply.status(StatusCodes.INTERNAL_SERVER_ERROR).send({
+                return reply.status(StatusCodes.INTERNAL_SERVER_ERROR).send({
                     error: 'Failed to create payment session',
                 })
             }
         },
     )
+}
+
+type YooKassaWebhookEvent = {
+    event: string
+    object: {
+        amount: {
+            value: string
+        }
+        metadata?: {
+            platformId?: string
+            type?: string
+        }
+    }
+}
+
+type CreateYooKassaPaymentSessionBody = {
+    platformId: string
+    amount: number
+    description: string
+    paymentMethod: 'card' | 'sbp'
 }

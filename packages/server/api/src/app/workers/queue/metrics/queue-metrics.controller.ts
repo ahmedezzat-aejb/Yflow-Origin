@@ -1,6 +1,6 @@
+import { FastifyPluginAsyncTypebox } from '@fastify/type-provider-typebox'
 import { securityAccess } from '@yflow/server-shared'
 import { PrincipalType, QueueMetricsResponse, SERVICE_KEY_SECURITY_OPENAPI } from '@yflow/shared'
-import { FastifyPluginAsyncTypebox } from '@fastify/type-provider-typebox'
 import { StatusCodes } from 'http-status-codes'
 import { queueMetricService } from './queue-metrics.service'
 

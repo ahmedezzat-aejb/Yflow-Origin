@@ -1,11 +1,10 @@
-import { apDayjs, AppSystemProp, WorkerSystemProp } from '@yflow/server-shared'
+import { AppSystemProp, WorkerSystemProp } from '@yflow/server-shared'
 import { ApEdition, assertNotNullOrUndefined, isNil, UserWithMetaInformation } from '@yflow/shared'
-import { FastifyBaseLogger } from 'fastify'
 import axios from 'axios'
+import { FastifyBaseLogger } from 'fastify'
 import { system } from '../../../helper/system/system'
-import { platformPlanService } from './platform-plan.service'
 
-export const sberbankWebhookSecret = system.get(AppSystemProp.SBERBANK_WEBHOOK_SECRET)!
+export const sberbankWebhookSecret = system.get(AppSystemProp.SBERBANK_WEBHOOK_SECRET)
 const frontendUrl = system.get(WorkerSystemProp.FRONTEND_URL)
 
 export const sberbankHelper = (log: FastifyBaseLogger) => ({
@@ -14,11 +13,11 @@ export const sberbankHelper = (log: FastifyBaseLogger) => ({
 
         const apiKey = system.getOrThrow(AppSystemProp.SBERBANK_API_KEY)
         const merchantId = system.getOrThrow(AppSystemProp.SBERBANK_MERCHANT_ID)
-        
+
         return {
             apiKey,
             merchantId,
-            baseUrl: system.get(AppSystemProp.SBERBANK_BASE_URL) || 'https://api.sberbank.ru/v1'
+            baseUrl: system.get(AppSystemProp.SBERBANK_BASE_URL) || 'https://api.sberbank.ru/v1',
         }
     },
 
@@ -39,12 +38,13 @@ export const sberbankHelper = (log: FastifyBaseLogger) => ({
                 headers: {
                     'Authorization': `Bearer ${client.apiKey}`,
                     'X-Merchant-ID': client.merchantId,
-                    'Content-Type': 'application/json'
-                }
+                    'Content-Type': 'application/json',
+                },
             })
 
             return response.data.id
-        } catch (error) {
+        }
+        catch (error) {
             log.error({ error, platformId }, 'Failed to create Sberbank customer')
             throw error
         }
@@ -78,12 +78,13 @@ export const sberbankHelper = (log: FastifyBaseLogger) => ({
                 headers: {
                     'Authorization': `Bearer ${client.apiKey}`,
                     'X-Merchant-ID': client.merchantId,
-                    'Content-Type': 'application/json'
-                }
+                    'Content-Type': 'application/json',
+                },
             })
 
             return response.data.payment_url
-        } catch (error) {
+        }
+        catch (error) {
             log.error({ error, params }, 'Failed to create Sberbank payment session')
             throw error
         }
@@ -117,18 +118,19 @@ export const sberbankHelper = (log: FastifyBaseLogger) => ({
                 headers: {
                     'Authorization': `Bearer ${client.apiKey}`,
                     'X-Merchant-ID': client.merchantId,
-                    'Content-Type': 'application/json'
-                }
+                    'Content-Type': 'application/json',
+                },
             })
 
             return response.data.subscription_url
-        } catch (error) {
+        }
+        catch (error) {
             log.error({ error, params }, 'Failed to create Sberbank subscription session')
             throw error
         }
     },
 
-    async getPaymentDetails(paymentId: string): Promise<any> {
+    async getPaymentDetails(paymentId: string): Promise<unknown> {
         const client = this.getSberbankClient()
         assertNotNullOrUndefined(client, 'Sberbank is not configured')
 
@@ -137,18 +139,19 @@ export const sberbankHelper = (log: FastifyBaseLogger) => ({
                 headers: {
                     'Authorization': `Bearer ${client.apiKey}`,
                     'X-Merchant-ID': client.merchantId,
-                    'Content-Type': 'application/json'
-                }
+                    'Content-Type': 'application/json',
+                },
             })
 
             return response.data
-        } catch (error) {
+        }
+        catch (error) {
             log.error({ error, paymentId }, 'Failed to get Sberbank payment details')
             throw error
         }
     },
 
-    async getSubscriptionDetails(subscriptionId: string): Promise<any> {
+    async getSubscriptionDetails(subscriptionId: string): Promise<unknown> {
         const client = this.getSberbankClient()
         assertNotNullOrUndefined(client, 'Sberbank is not configured')
 
@@ -157,12 +160,13 @@ export const sberbankHelper = (log: FastifyBaseLogger) => ({
                 headers: {
                     'Authorization': `Bearer ${client.apiKey}`,
                     'X-Merchant-ID': client.merchantId,
-                    'Content-Type': 'application/json'
-                }
+                    'Content-Type': 'application/json',
+                },
             })
 
             return response.data
-        } catch (error) {
+        }
+        catch (error) {
             log.error({ error, subscriptionId }, 'Failed to get Sberbank subscription details')
             throw error
         }
@@ -177,50 +181,37 @@ export const sberbankHelper = (log: FastifyBaseLogger) => ({
                 headers: {
                     'Authorization': `Bearer ${client.apiKey}`,
                     'X-Merchant-ID': client.merchantId,
-                    'Content-Type': 'application/json'
-                }
+                    'Content-Type': 'application/json',
+                },
             })
-        } catch (error) {
+        }
+        catch (error) {
             log.error({ error, subscriptionId }, 'Failed to cancel Sberbank subscription')
             throw error
         }
     },
 
-    verifyWebhookSignature(payload: string, signature: string): boolean {
+    async verifyWebhookSignature(payload: string, signature: string): Promise<boolean> {
         const webhookSecret = system.get(AppSystemProp.SBERBANK_WEBHOOK_SECRET)
         if (isNil(webhookSecret)) return false
 
         try {
-            const crypto = require('crypto')
+            const crypto = await import('crypto')
             const expectedSignature = crypto
                 .createHmac('sha256', webhookSecret)
                 .update(payload)
                 .digest('hex')
-            
+
             return signature === expectedSignature
-        } catch (error) {
+        }
+        catch (error) {
             log.error({ error }, 'Failed to verify Sberbank webhook signature')
             return false
         }
-    }
+    },
 })
 
 export enum SberbankCheckoutType {
     AI_CREDIT_PAYMENT = 'sberbank-ai-credit-payment',
     SUBSCRIPTION_PAYMENT = 'sberbank-subscription-payment',
-}
-
-type CreateSberbankPaymentParams = {
-    platformId: string
-    customerId: string
-    amountInRub: number
-    description: string
-}
-
-type CreateSberbankSubscriptionParams = {
-    platformId: string
-    customerId: string
-    planId: string
-    amountInRub: number
-    interval: 'month' | 'year'
 }

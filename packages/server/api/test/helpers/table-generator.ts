@@ -1,5 +1,5 @@
-import { apId, Field, FieldState, FieldType, PopulatedTable, TableAutomationStatus } from '@yflow/shared'
 import { faker } from '@faker-js/faker'
+import { apId, Field, FieldState, FieldType, PopulatedTable, TableAutomationStatus } from '@yflow/shared'
 
 export const tableGenerator = {
     simpleTable(table: Partial<PopulatedTable>): PopulatedTable {

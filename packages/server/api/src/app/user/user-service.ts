@@ -1,5 +1,4 @@
 import {
-    yflowError,
     ApEdition,
     apId,
     assertNotNullOrUndefined,
@@ -18,6 +17,7 @@ import {
     UserStatus,
     UserWithBadges,
     UserWithMetaInformation,
+    yflowError,
 } from '@yflow/shared'
 import dayjs from 'dayjs'
 import { In } from 'typeorm'

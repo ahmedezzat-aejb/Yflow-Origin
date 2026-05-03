@@ -1,6 +1,6 @@
+import { FastifyPluginAsyncTypebox } from '@fastify/type-provider-typebox'
 import { ProjectResourceType, securityAccess } from '@yflow/server-shared'
 import { CancelTestTriggerRequestBody, PrincipalType, TestTriggerRequestBody } from '@yflow/shared'
-import { FastifyPluginAsyncTypebox } from '@fastify/type-provider-typebox'
 import { testTriggerService } from '../../trigger/test-trigger/test-trigger-service'
 
 export const testTriggerController: FastifyPluginAsyncTypebox = async (app) => {

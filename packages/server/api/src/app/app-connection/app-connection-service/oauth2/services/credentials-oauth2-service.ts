@@ -1,13 +1,13 @@
 import { OAuth2AuthorizationMethod } from '@yflow/pieces-framework'
 import { apAxios } from '@yflow/server-shared'
-import { yflowError,
-    AppConnectionType,
+import { AppConnectionType,
     BaseOAuth2ConnectionValue,
     ErrorCode,
     isNil,
     OAuth2ConnectionValueWithApp,
     OAuth2GrantType,
     resolveValueFromProps,
+    yflowError,
 } from '@yflow/shared'
 import { AxiosError } from 'axios'
 import { FastifyBaseLogger } from 'fastify'

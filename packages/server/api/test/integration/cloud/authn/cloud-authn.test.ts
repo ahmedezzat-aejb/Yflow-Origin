@@ -1,3 +1,4 @@
+import { faker } from '@faker-js/faker'
 import {
     CustomDomain,
     OtpType,
@@ -15,7 +16,6 @@ import {
     User,
     UserStatus,
 } from '@yflow/shared'
-import { faker } from '@faker-js/faker'
 import dayjs from 'dayjs'
 import { FastifyBaseLogger, FastifyInstance } from 'fastify'
 import { StatusCodes } from 'http-status-codes'

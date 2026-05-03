@@ -1,9 +1,9 @@
+import { FastifyPluginAsyncTypebox, Type } from '@fastify/type-provider-typebox'
 import { securityAccess } from '@yflow/server-shared'
 import {
     ApId,
     USE_DRAFT_QUERY_PARAM_NAME,
 } from '@yflow/shared'
-import { FastifyPluginAsyncTypebox, Type } from '@fastify/type-provider-typebox'
 import { humanInputService } from './human-input.service'
 
 export const chatController: FastifyPluginAsyncTypebox = async (app) => {

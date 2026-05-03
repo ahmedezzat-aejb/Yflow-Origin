@@ -4,12 +4,12 @@ import {
     UpsertOAuth2AppRequest,
 } from '@yflow/ee-shared'
 import {
-    yflowError,
     apId,
     deleteProps,
     ErrorCode,
     isNil,
     SeekPage,
+    yflowError,
 } from '@yflow/shared'
 import { repoFactory } from '../../core/db/repo-factory'
 import { encryptUtils } from '../../helper/encryption'

@@ -1,3 +1,7 @@
+import {
+    FastifyPluginAsyncTypebox,
+    Type,
+} from '@fastify/type-provider-typebox'
 import { EntitySourceType, ProjectResourceType, securityAccess } from '@yflow/server-shared'
 import {
     CreateRecordsRequest,
@@ -10,10 +14,6 @@ import {
     SERVICE_KEY_SECURITY_OPENAPI,
     UpdateRecordRequest,
 } from '@yflow/shared'
-import {
-    FastifyPluginAsyncTypebox,
-    Type,
-} from '@fastify/type-provider-typebox'
 import { StatusCodes } from 'http-status-codes'
 import { entitiesMustBeOwnedByCurrentProject } from '../../authentication/authorization'
 import { TableEntity } from '../table/table.entity'

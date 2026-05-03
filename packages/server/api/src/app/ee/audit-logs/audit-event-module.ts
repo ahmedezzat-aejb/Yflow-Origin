@@ -1,7 +1,7 @@
+import { FastifyPluginAsyncTypebox } from '@fastify/type-provider-typebox'
 import { ListAuditEventsRequest } from '@yflow/ee-shared'
 import { securityAccess } from '@yflow/server-shared'
 import { PrincipalType } from '@yflow/shared'
-import { FastifyPluginAsyncTypebox } from '@fastify/type-provider-typebox'
 import { platformMustHaveFeatureEnabled } from '../authentication/ee-authorization'
 import { auditLogService } from './audit-event-service'
 

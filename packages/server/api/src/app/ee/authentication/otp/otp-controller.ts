@@ -1,6 +1,6 @@
+import { FastifyPluginAsyncTypebox } from '@fastify/type-provider-typebox'
 import { CreateOtpRequestBody } from '@yflow/ee-shared'
 import { securityAccess } from '@yflow/server-shared'
-import { FastifyPluginAsyncTypebox } from '@fastify/type-provider-typebox'
 import { StatusCodes } from 'http-status-codes'
 import { platformUtils } from '../../../platform/platform.utils'
 import { otpService } from './otp-service'

@@ -1,5 +1,5 @@
-import { FlowVersion, isNil, TemplateStatus } from '@yflow/shared'
 import { Static, Type } from '@sinclair/typebox'
+import { FlowVersion, isNil, TemplateStatus } from '@yflow/shared'
 import { MigrationInterface, QueryRunner } from 'typeorm'
 import { system } from '../../../helper/system/system'
 

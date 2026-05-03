@@ -1,7 +1,7 @@
+import { FastifyPluginAsyncTypebox } from '@fastify/type-provider-typebox'
 import { PieceMetadataModel } from '@yflow/pieces-framework'
 import { ProjectResourceType, securityAccess } from '@yflow/server-shared'
 import { AddPieceRequestBody, PrincipalType } from '@yflow/shared'
-import { FastifyPluginAsyncTypebox } from '@fastify/type-provider-typebox'
 import { StatusCodes } from 'http-status-codes'
 import { pieceInstallService } from './piece-install-service'
 

@@ -1,11 +1,11 @@
 
+import { FastifyPluginAsyncTypebox } from '@fastify/type-provider-typebox'
 import { ProjectResourceType, securityAccess } from '@yflow/server-shared'
 import {
     ListTriggerEventsRequest,
     PrincipalType,
     SaveTriggerEventRequest,
 } from '@yflow/shared'
-import { FastifyPluginAsyncTypebox } from '@fastify/type-provider-typebox'
 import { flowService } from '../../flows/flow/flow.service'
 import { triggerEventService } from './trigger-event.service'
 

@@ -1,8 +1,8 @@
 
-import { yflowError, ErrorCode, SAMLAuthnProviderConfig } from '@yflow/shared'
 import * as validator from '@authenio/samlify-node-xmllint'
 import { Type } from '@sinclair/typebox'
 import { TypeCompiler } from '@sinclair/typebox/compiler'
+import { ErrorCode, SAMLAuthnProviderConfig, yflowError } from '@yflow/shared'
 import * as saml from 'samlify'
 import { domainHelper } from '../../custom-domains/domain-helper'
 

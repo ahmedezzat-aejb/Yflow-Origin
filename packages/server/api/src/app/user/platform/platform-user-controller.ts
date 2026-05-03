@@ -1,3 +1,7 @@
+import {
+    FastifyPluginAsyncTypebox,
+    Type,
+} from '@fastify/type-provider-typebox'
 import { securityAccess } from '@yflow/server-shared'
 import {
     ApId,
@@ -9,10 +13,6 @@ import {
     UpdateUserRequestBody,
     UserWithMetaInformation,
 } from '@yflow/shared'
-import {
-    FastifyPluginAsyncTypebox,
-    Type,
-} from '@fastify/type-provider-typebox'
 import { StatusCodes } from 'http-status-codes'
 import { userService } from '../user-service'
 

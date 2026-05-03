@@ -16,7 +16,7 @@ export const aiProviders: Record<AIProviderName, AIProviderStrategy<AIProviderAu
     [AIProviderName.GOOGLE]: googleProvider,
     [AIProviderName.CLOUDFLARE_GATEWAY]: cloudflareGatewayProvider,
     [AIProviderName.CUSTOM]: openAICompatibleProvider,
-    [AIProviderName.yflow]: {
+    [AIProviderName.YFLOW]: {
         ...openRouterProvider,
         name: 'yflow',
     },

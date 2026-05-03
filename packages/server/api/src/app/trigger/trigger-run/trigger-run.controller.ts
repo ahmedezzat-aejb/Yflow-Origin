@@ -1,6 +1,6 @@
+import { FastifyPluginAsyncTypebox } from '@fastify/type-provider-typebox'
 import { securityAccess, triggerRunStats } from '@yflow/server-shared'
 import { PrincipalType } from '@yflow/shared'
-import { FastifyPluginAsyncTypebox } from '@fastify/type-provider-typebox'
 import { redisConnections } from '../../database/redis-connections'
 
 export const triggerRunController: FastifyPluginAsyncTypebox = async (app) => {

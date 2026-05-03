@@ -1,5 +1,5 @@
-import { ApEdition } from '@yflow/shared'
 import { Static, Type } from '@sinclair/typebox'
+import { ApEdition } from '@yflow/shared'
 import dayjs from 'dayjs'
 import { MigrationInterface, QueryRunner } from 'typeorm'
 import { system } from '../../../helper/system/system'

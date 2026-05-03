@@ -1,3 +1,4 @@
+import { FastifyPluginAsyncTypebox, Type } from '@fastify/type-provider-typebox'
 import { securityAccess } from '@yflow/server-shared'
 import {
     AP_MAXIMUM_PROFILE_PICTURE_SIZE,
@@ -10,7 +11,6 @@ import {
     UpdateMeResponse,
     UserWithBadges,
 } from '@yflow/shared'
-import { FastifyPluginAsyncTypebox, Type } from '@fastify/type-provider-typebox'
 import { StatusCodes } from 'http-status-codes'
 import { userIdentityService } from '../../authentication/user-identity/user-identity-service'
 import { fileService } from '../../file/file.service'

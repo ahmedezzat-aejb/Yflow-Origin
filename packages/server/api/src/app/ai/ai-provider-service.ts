@@ -1,13 +1,13 @@
 import {
-    yflowError, yflowProviderAuthConfig, AIProviderAuthConfig, AIProviderModel, AIProviderName, AIProviderWithoutSensitiveData,
-    apId,
-    CreateAIProviderRequest,
+    AIProviderAuthConfig, AIProviderModel, AIProviderName, AIProviderWithoutSensitiveData, apId, CreateAIProviderRequest,
     ErrorCode,
     GetProviderConfigResponse,
     isNil,
     PlatformId,
     spreadIfDefined,
     UpdateAIProviderRequest,
+    YFLOW_PROVIDER_AUTH_CONFIG,
+    yflowError,
 } from '@yflow/shared'
 import dayjs from 'dayjs'
 import { FastifyBaseLogger } from 'fastify'
@@ -38,7 +38,7 @@ export const aiProviderService = (log: FastifyBaseLogger) => ({
     async listProviders(platformId: PlatformId): Promise<AIProviderWithoutSensitiveData[]> {
         const yflowExists = await aiProviderRepo().existsBy({
             platformId,
-            provider: AIProviderName.yflow,
+            provider: AIProviderName.YFLOW,
         })
 
         if (flagService.aiCreditsEnabled() && !yflowExists) {
@@ -46,7 +46,7 @@ export const aiProviderService = (log: FastifyBaseLogger) => ({
                 id: apId(),
                 auth: await encryptUtils.encryptObject({}),
                 config: {},
-                provider: AIProviderName.yflow,
+                provider: AIProviderName.YFLOW,
                 displayName: 'yflow',
                 platformId,
             })
@@ -98,7 +98,7 @@ export const aiProviderService = (log: FastifyBaseLogger) => ({
             platformId,
             id: providerId,
         })
-        if (isNil(aiProvider) || aiProvider.provider === AIProviderName.yflow) {
+        if (isNil(aiProvider) || aiProvider.provider === AIProviderName.YFLOW) {
             throw new yflowError({
                 code: ErrorCode.ENTITY_NOT_FOUND,
                 params: { entityId: providerId, entityType: 'AIProvider' },
@@ -136,7 +136,7 @@ export const aiProviderService = (log: FastifyBaseLogger) => ({
 
         let auth = await encryptUtils.decryptObject<AIProviderAuthConfig>(aiProvider.auth)
 
-        if (aiProvider.provider === AIProviderName.yflow) {
+        if (aiProvider.provider === AIProviderName.YFLOW) {
             const doesHaveKeys = !isNil(auth) && !isNil(auth.apiKey) && auth.apiKey !== ''
             if (!doesHaveKeys) {
                 const { auth: yflowAuth } = await enrichWithKeysIfNeeded(aiProvider, platformId, log)
@@ -147,7 +147,7 @@ export const aiProviderService = (log: FastifyBaseLogger) => ({
             await systemJobsSchedule(log).upsertJob({
                 job: {
                     name: SystemJobName.AI_CREDIT_UPDATE_CHECK,
-                    data: { apiKeyHash: (auth as yflowProviderAuthConfig).apiKeyHash, platformId },
+                    data: { apiKeyHash: (auth as YFLOW_PROVIDER_AUTH_CONFIG).apiKeyHash, platformId },
                 },
                 schedule: {
                     type: 'one-time',
@@ -159,10 +159,10 @@ export const aiProviderService = (log: FastifyBaseLogger) => ({
         
         return { provider: aiProvider.provider, auth, config: aiProvider.config }
     },
-    async getyflowProviderIfEnriched(platformId: PlatformId): Promise<yflowProviderAuthConfig | null> {
+    async getyflowProviderIfEnriched(platformId: PlatformId): Promise<YFLOW_PROVIDER_AUTH_CONFIG | null> {
         const aiProvider = await aiProviderRepo().findOneBy({
             platformId,
-            provider: AIProviderName.yflow,
+            provider: AIProviderName.YFLOW,
         })
         if (isNil(aiProvider)) {
             return null
@@ -173,43 +173,43 @@ export const aiProviderService = (log: FastifyBaseLogger) => ({
         }
         const { auth } = await this.getConfigOrThrow({ platformId, provider: aiProvider.provider })
 
-        return auth as yflowProviderAuthConfig
+        return auth as YFLOW_PROVIDER_AUTH_CONFIG
     },
 
-    async getOrCreateyflowProviderAuthConfig(platformId: PlatformId): Promise<yflowProviderAuthConfig> {
+    async getOrCreateyflowProviderAuthConfig(platformId: PlatformId): Promise<YFLOW_PROVIDER_AUTH_CONFIG> {
         const aiProvider = await aiProviderRepo().findOneBy({
             platformId,
-            provider: AIProviderName.yflow,
+            provider: AIProviderName.YFLOW,
         })
         if (isNil(aiProvider)) {
             await aiProviderRepo().save({
                 id: apId(),
                 auth: await encryptUtils.encryptObject({}),
                 config: {},
-                provider: AIProviderName.yflow,
+                provider: AIProviderName.YFLOW,
                 displayName: 'yflow',
                 platformId,
             })
         }
 
-        const { auth } = await this.getConfigOrThrow({ platformId, provider: AIProviderName.Yflow})
-        return auth as yflowProviderAuthConfig
+        const { auth } = await this.getConfigOrThrow({ platformId, provider: AIProviderName.YFLOW })
+        return auth as YFLOW_PROVIDER_AUTH_CONFIG
     },
 
-    async getAllyflowProvidersConfigs(platformIds?: string[]): Promise<{ [platformId: string]: yflowProviderAuthConfig }> {
+    async getAllyflowProvidersConfigs(platformIds?: string[]): Promise<{ [platformId: string]: YFLOW_PROVIDER_AUTH_CONFIG }> {
         const aiProviders = await aiProviderRepo().find({
             where: {
-                provider: AIProviderName.yflow,
+                provider: AIProviderName.YFLOW,
                 platformId: platformIds?.length ? In(platformIds) : undefined,
             },
         })
 
-        const result: { [platformId: string]: yflowProviderAuthConfig } = {}
+        const result: { [platformId: string]: YFLOW_PROVIDER_AUTH_CONFIG } = {}
         for (const aiProvider of aiProviders) {
             const hasKeys = await doesyflowProviderHasKeys(aiProvider)
             if (!hasKeys) continue
 
-            result[aiProvider.platformId] = await encryptUtils.decryptObject<yflowProviderAuthConfig>(aiProvider.auth)
+            result[aiProvider.platformId] = await encryptUtils.decryptObject<YFLOW_PROVIDER_AUTH_CONFIG>(aiProvider.auth)
         }
 
         return result
@@ -228,11 +228,11 @@ async function enrichWithKeysIfNeeded(aiProvider: AIProviderSchema, platformId: 
         name: `Platform ${platformId}`, 
         limit,
     })
-    const rawAuth: yflowProviderAuthConfig = { apiKey: key, apiKeyHash: data.hash }
+    const rawAuth: YFLOW_PROVIDER_AUTH_CONFIG = { apiKey: key, apiKeyHash: data.hash }
     const savedAiProvider = await aiProviderRepo().save({
         id: aiProvider.id,
         platformId,
-        provider: AIProviderName.yflow,
+        provider: AIProviderName.YFLOW,
         displayName: 'yflow',
         config: {},
         auth: await encryptUtils.encryptObject(rawAuth),
@@ -249,6 +249,6 @@ async function doesyflowProviderHasKeys(aiProvider: AIProviderSchema): Promise<b
     if (isNil(aiProvider) || isNil(aiProvider.auth)) {
         return false
     }
-    const decryptedAuth = await encryptUtils.decryptObject<yflowProviderAuthConfig>(aiProvider.auth)
+    const decryptedAuth = await encryptUtils.decryptObject<YFLOW_PROVIDER_AUTH_CONFIG>(aiProvider.auth)
     return !isNil(decryptedAuth) && !isNil(decryptedAuth.apiKey) && decryptedAuth.apiKey !== ''
 }

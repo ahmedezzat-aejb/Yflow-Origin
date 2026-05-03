@@ -1,6 +1,6 @@
+import { context, propagation, trace } from '@opentelemetry/api'
 import { AppSystemProp } from '@yflow/server-shared'
 import {
-    yflowError,
     apId,
     assertNotNullOrUndefined,
     Cursor,
@@ -25,8 +25,8 @@ import {
     SeekPage,
     UploadLogsBehavior,
     WorkerJobType,
+    yflowError,
 } from '@yflow/shared'
-import { context, propagation, trace } from '@opentelemetry/api'
 import { FastifyBaseLogger } from 'fastify'
 import { StatusCodes } from 'http-status-codes'
 import pLimit from 'p-limit'

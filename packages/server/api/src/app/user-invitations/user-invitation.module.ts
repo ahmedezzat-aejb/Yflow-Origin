@@ -1,6 +1,6 @@
+import { FastifyPluginAsyncTypebox, Type } from '@fastify/type-provider-typebox'
 import { securityAccess } from '@yflow/server-shared'
 import {
-    yflowError,
     assertNotNullOrUndefined,
     ErrorCode,
     InvitationStatus,
@@ -16,8 +16,8 @@ import {
     SERVICE_KEY_SECURITY_OPENAPI,
     UserInvitation,
     UserInvitationWithLink,
+    yflowError,
 } from '@yflow/shared'
-import { FastifyPluginAsyncTypebox, Type } from '@fastify/type-provider-typebox'
 import dayjs from 'dayjs'
 import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify'
 import { StatusCodes } from 'http-status-codes'

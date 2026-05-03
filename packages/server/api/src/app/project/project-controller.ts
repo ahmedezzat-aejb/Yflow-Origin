@@ -1,6 +1,6 @@
+import { FastifyPluginAsyncTypebox, Type } from '@fastify/type-provider-typebox'
 import { ProjectResourceType, securityAccess } from '@yflow/server-shared'
 import { PrincipalType, Project, UpdateProjectRequestInCommunity } from '@yflow/shared'
-import { FastifyPluginAsyncTypebox, Type } from '@fastify/type-provider-typebox'
 import { StatusCodes } from 'http-status-codes'
 import { paginationHelper } from '../helper/pagination/pagination-utils'
 import { projectService } from './project-service'

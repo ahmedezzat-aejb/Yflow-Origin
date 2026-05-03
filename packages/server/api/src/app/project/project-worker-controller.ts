@@ -1,5 +1,5 @@
-import { securityAccess } from '@yflow/server-shared'
 import { FastifyPluginAsyncTypebox } from '@fastify/type-provider-typebox'
+import { securityAccess } from '@yflow/server-shared'
 import { projectService } from './project-service'
 
 export const projectWorkerController: FastifyPluginAsyncTypebox = async (

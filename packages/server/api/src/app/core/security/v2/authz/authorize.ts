@@ -1,5 +1,5 @@
 import { AuthorizationRouteSecurity, AuthorizationType, ProjectAuthorizationConfig, RouteKind } from '@yflow/server-shared'
-import { yflowError, ErrorCode, isNil, PlatformRole, Principal, PrincipalType } from '@yflow/shared'
+import { ErrorCode, isNil, PlatformRole, Principal, PrincipalType, yflowError } from '@yflow/shared'
 import { FastifyBaseLogger } from 'fastify'
 import { rbacService } from '../../../../ee/authentication/project-role/rbac-service'
 import { userService } from '../../../../user/user-service'

@@ -1,7 +1,7 @@
+import { FastifyPluginAsyncTypebox, Type } from '@fastify/type-provider-typebox'
 import { CreateAlertParams, ListAlertsParams } from '@yflow/ee-shared'
 import { ProjectResourceType, securityAccess } from '@yflow/server-shared'
 import { ApId, Permission, PrincipalType } from '@yflow/shared'
-import { FastifyPluginAsyncTypebox, Type } from '@fastify/type-provider-typebox'
 import { AlertEntity } from './alerts-entity'
 import { alertsService } from './alerts-service'
 

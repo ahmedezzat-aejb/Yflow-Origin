@@ -1,3 +1,5 @@
+import { RateLimitOptions } from '@fastify/rate-limit'
+import { FastifyPluginAsyncTypebox } from '@fastify/type-provider-typebox'
 import { ApplicationEventName } from '@yflow/ee-shared'
 import { AppSystemProp, networkUtils, securityAccess } from '@yflow/server-shared'
 import {
@@ -8,8 +10,6 @@ import {
     SwitchPlatformRequest,
     UserIdentityProvider,
 } from '@yflow/shared'
-import { RateLimitOptions } from '@fastify/rate-limit'
-import { FastifyPluginAsyncTypebox } from '@fastify/type-provider-typebox'
 import { applicationEvents } from '../helper/application-events'
 import { system } from '../helper/system/system'
 import { platformUtils } from '../platform/platform.utils'

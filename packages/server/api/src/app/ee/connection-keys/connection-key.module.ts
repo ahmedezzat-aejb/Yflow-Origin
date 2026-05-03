@@ -1,3 +1,4 @@
+import { FastifyPluginAsyncTypebox } from '@fastify/type-provider-typebox'
 import {
     ConnectionKeyId,
     GetOrDeleteConnectionFromTokenRequest,
@@ -7,7 +8,6 @@ import {
 } from '@yflow/ee-shared'
 import { ProjectResourceType, securityAccess } from '@yflow/server-shared'
 import { AppConnectionScope, PrincipalType } from '@yflow/shared'
-import { FastifyPluginAsyncTypebox } from '@fastify/type-provider-typebox'
 import { FastifyRequest } from 'fastify'
 import { StatusCodes } from 'http-status-codes'
 import { appConnectionService } from '../../app-connection/app-connection-service/app-connection-service'

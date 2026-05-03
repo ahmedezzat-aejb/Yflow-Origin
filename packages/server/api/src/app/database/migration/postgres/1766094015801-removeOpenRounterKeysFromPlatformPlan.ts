@@ -1,4 +1,4 @@
-import { yflowProviderConfig, AIProviderName, apId } from '@yflow/shared'
+import { AIProviderName, apId, YFLOW_PROVIDER_AUTH_CONFIG } from '@yflow/shared'
 import { MigrationInterface, QueryRunner } from 'typeorm'
 import { encryptUtils } from '../../../helper/encryption'
 
@@ -13,7 +13,7 @@ export class RemoveOpenRouterKeysFromPlatformPlan1766094015801 implements Migrat
         `)
 
         for (const plan of plans) {
-            const config: yflowProviderConfig = {
+            const config: YFLOW_PROVIDER_AUTH_CONFIG = {
                 apiKey: plan.openRouterApiKey,
                 apiKeyHash: plan.openRouterApiKeyHash,
             }
@@ -26,7 +26,7 @@ export class RemoveOpenRouterKeysFromPlatformPlan1766094015801 implements Migrat
             `, [
                 apId(),
                 plan.platformId,
-                AIProviderName.yflow,
+                AIProviderName.YFLOW,
                 'yflow',
                 encryptedConfig,
             ])

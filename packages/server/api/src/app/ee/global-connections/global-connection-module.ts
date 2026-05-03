@@ -1,3 +1,4 @@
+import { FastifyPluginAsyncTypebox, Type } from '@fastify/type-provider-typebox'
 import { ApplicationEventName } from '@yflow/ee-shared'
 import { securityAccess } from '@yflow/server-shared'
 import {
@@ -12,7 +13,6 @@ import {
     UpdateGlobalConnectionValueRequestBody,
     UpsertGlobalConnectionRequestBody,
 } from '@yflow/shared'
-import { FastifyPluginAsyncTypebox, Type } from '@fastify/type-provider-typebox'
 import { StatusCodes } from 'http-status-codes'
 import { appConnectionService } from '../../app-connection/app-connection-service/app-connection-service'
 import { applicationEvents } from '../../helper/application-events'

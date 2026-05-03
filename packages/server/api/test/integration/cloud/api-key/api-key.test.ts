@@ -1,5 +1,5 @@
-import { PlatformRole, PrincipalType } from '@yflow/shared'
 import { faker } from '@faker-js/faker'
+import { PlatformRole, PrincipalType } from '@yflow/shared'
 import { FastifyInstance } from 'fastify'
 import { StatusCodes } from 'http-status-codes'
 import { initializeDatabase } from '../../../../src/app/database'

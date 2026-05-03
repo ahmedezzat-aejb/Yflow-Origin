@@ -1,15 +1,15 @@
 import {
+    FastifyPluginAsyncTypebox,
+    Static,
+    Type,
+} from '@fastify/type-provider-typebox'
+import {
     ListOAuth2AppRequest,
     OAuthApp,
     UpsertOAuth2AppRequest,
 } from '@yflow/ee-shared'
 import { securityAccess } from '@yflow/server-shared'
 import { assertNotNullOrUndefined, PrincipalType, SeekPage } from '@yflow/shared'
-import {
-    FastifyPluginAsyncTypebox,
-    Static,
-    Type,
-} from '@fastify/type-provider-typebox'
 import { StatusCodes } from 'http-status-codes'
 import { oauthAppService } from './oauth-app.service'
 

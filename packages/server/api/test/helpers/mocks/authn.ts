@@ -1,5 +1,5 @@
-import { SignInRequest, SignUpRequest } from '@yflow/shared'
 import { faker } from '@faker-js/faker'
+import { SignInRequest, SignUpRequest } from '@yflow/shared'
 
 export const createMockSignUpRequest = (
     signUpRequest?: Partial<SignUpRequest>,

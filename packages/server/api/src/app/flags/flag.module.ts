@@ -1,5 +1,5 @@
-import { securityAccess } from '@yflow/server-shared'
 import { FastifyPluginAsyncTypebox } from '@fastify/type-provider-typebox'
+import { securityAccess } from '@yflow/server-shared'
 import { FastifyRequest } from 'fastify'
 import { flagService } from './flag.service'
 import { flagHooks } from './flags.hooks'

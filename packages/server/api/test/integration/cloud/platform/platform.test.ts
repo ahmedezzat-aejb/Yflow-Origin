@@ -1,10 +1,10 @@
+import { faker } from '@faker-js/faker'
 import { apId, FilteredPieceBehavior,
     PlanName,
     PlatformRole,
     PrincipalType,
     UpdatePlatformRequestBody,
 } from '@yflow/shared'
-import { faker } from '@faker-js/faker'
 import { FastifyInstance } from 'fastify'
 import { StatusCodes } from 'http-status-codes'
 import { initializeDatabase } from '../../../../src/app/database'

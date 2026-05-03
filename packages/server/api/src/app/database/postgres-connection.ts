@@ -315,7 +315,7 @@ import { AddTemplateStatus1765894492098 } from './migration/postgres/17658944920
 import { MigrateOldTemplatesToNewSchema1765993826655 } from './migration/postgres/1765993826655-MigrateOldTemplatesToNewSchema'
 import { DropLegacyTables1766015156683 } from './migration/postgres/1766015156683-DropLegacyTables'
 import { RecreateMcpToolTable1766072572000 } from './migration/postgres/1766072572000-RecreateMcpToolTable'
-import { RemoveOpenRounterKeysFromPlatformPlan1766094015801 } from './migration/postgres/1766094015801-removeOpenRounterKeysFromPlatformPlan'
+import { RemoveOpenRouterKeysFromPlatformPlan1766094015801 } from './migration/postgres/1766094015801-removeOpenRounterKeysFromPlatformPlan'
 import { AddPlatformAiCreditsPaymentTable1766186963979 } from './migration/postgres/1766186963979-addPlatformAiCreditsPaymentTable'
 import { AddAuthConfigInAiProviders1766328841463 } from './migration/postgres/1766328841463-addAuthConfigInAiProviders'
 import { PlatformIdAndProviderUnique1766375959255 } from './migration/postgres/1766375959255-PlatformIdAndProviderUnique'
@@ -663,7 +663,7 @@ export const getMigrations = (): (new () => MigrationInterface)[] => {
         AddTemplateStatus1765894492098,
         MigrateOldTemplatesToNewSchema1765993826655,
         AddPlatformAiCreditsPaymentTable1766186963979,
-        RemoveOpenRounterKeysFromPlatformPlan1766094015801,
+        RemoveOpenRouterKeysFromPlatformPlan1766094015801,
         AddAuthConfigInAiProviders1766328841463,
         DropLegacyTables1766015156683,
         RecreateMcpToolTable1766072572000,
