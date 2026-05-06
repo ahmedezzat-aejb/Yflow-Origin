@@ -1,8 +1,8 @@
 import { json } from '@codemirror/lang-json';
+import { EditorView } from '@codemirror/view';
 import { githubDark, githubLight } from '@uiw/codemirror-theme-github';
 import CodeMirror, {
   EditorState,
-  EditorView,
   ReactCodeMirrorRef,
 } from '@uiw/react-codemirror';
 import React, { RefObject, useRef, useState } from 'react';

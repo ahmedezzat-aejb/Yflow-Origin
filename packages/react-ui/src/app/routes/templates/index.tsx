@@ -1,6 +1,6 @@
 import { t } from 'i18next';
 import { Plus, Search } from 'lucide-react';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { InputWithIcon } from '@/components/custom/input-with-icon';
@@ -12,6 +12,7 @@ import { templatesTelemetryApi } from '@/features/templates/lib/templates-teleme
 import { platformHooks } from '@/hooks/platform-hooks';
 import {
   Template,
+  TemplateStatus,
   TemplateTelemetryEventType,
   TemplateType,
   UncategorizedFolderId,
@@ -25,70 +26,60 @@ import { SelectedCategoryView } from './selected-category-view';
 const TemplatesPage = () => {
   const navigate = useNavigate();
   // Mock categories for Community Edition
-  const mockCategories = [
-    { name: 'All', displayName: 'All' },
-    { name: 'Communication', displayName: 'Communication' },
-    { name: 'Marketing', displayName: 'Marketing' },
-    { name: 'Data', displayName: 'Data' },
-    { name: 'AI', displayName: 'AI' },
-    { name: 'Social', displayName: 'Social' },
-  ];
+  const mockCategories = ['Communication', 'Marketing', 'Data', 'AI', 'Social'];
 
   const templateCategories = mockCategories;
   const { platform } = platformHooks.useCurrentPlatform();
   const isShowingOfficialTemplates = true; // Show official templates for Community Edition
 
-  const mockTemplates = [
-    {
+  const createMockTemplate = (
+    template: Pick<Template, 'id' | 'name' | 'description' | 'categories'>,
+  ): Template => ({
+    ...template,
+    summary: template.description,
+    tags: [],
+    blogUrl: null,
+    metadata: null,
+    author: 'Yflow',
+    pieces: [],
+    type: TemplateType.OFFICIAL,
+    platformId: null,
+    status: TemplateStatus.PUBLISHED,
+    created: new Date().toISOString(),
+    updated: new Date().toISOString(),
+  });
+
+  const mockTemplates: Template[] = [
+    createMockTemplate({
       id: 'slack-notifications',
       name: 'Slack Notifications',
       description: 'Send notifications to Slack channels',
       categories: ['Communication'],
-      type: 'OFFICIAL',
-      platformId: null,
-      created: new Date().toISOString(),
-      updated: new Date().toISOString(),
-    },
-    {
+    }),
+    createMockTemplate({
       id: 'email-marketing',
       name: 'Email Marketing',
       description: 'Automated email marketing campaigns',
       categories: ['Marketing'],
-      type: 'OFFICIAL',
-      platformId: null,
-      created: new Date().toISOString(),
-      updated: new Date().toISOString(),
-    },
-    {
+    }),
+    createMockTemplate({
       id: 'data-sync',
       name: 'Data Synchronization',
       description: 'Sync data between different systems',
       categories: ['Data'],
-      type: 'OFFICIAL',
-      platformId: null,
-      created: new Date().toISOString(),
-      updated: new Date().toISOString(),
-    },
-    {
+    }),
+    createMockTemplate({
       id: 'ai-workflow',
       name: 'AI Workflow Automation',
       description: 'Automate workflows with AI',
       categories: ['AI'],
-      type: 'OFFICIAL',
-      platformId: null,
-      created: new Date().toISOString(),
-      updated: new Date().toISOString(),
-    },
-    {
+    }),
+    createMockTemplate({
       id: 'social-media',
       name: 'Social Media Management',
       description: 'Manage social media posts automatically',
       categories: ['Social'],
-      type: 'OFFICIAL',
-      platformId: null,
-      created: new Date().toISOString(),
-      updated: new Date().toISOString(),
-    },
+    }),
   ];
 
   const templates = mockTemplates;
@@ -197,7 +188,7 @@ const TemplatesPage = () => {
             <CategoryFilterCarousel
               categories={categories}
               selectedCategory={selectedCategory}
-              onCategorySelect={setCategory}
+              onCategorySelect={setSelectedCategory}
             />
           )}
         </div>
@@ -208,7 +199,7 @@ const TemplatesPage = () => {
           <AllCategoriesView
             templatesByCategory={templatesByCategory}
             categories={categories}
-            onCategorySelect={setCategory}
+            onCategorySelect={setSelectedCategory}
             onTemplateSelect={handleTemplateSelect}
             isLoading={showLoading}
             hideHeader={!isShowingOfficialTemplates}

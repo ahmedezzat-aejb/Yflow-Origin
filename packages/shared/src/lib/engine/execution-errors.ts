@@ -8,10 +8,11 @@ export class ExecutionError extends Error {
 
     public type: ExecutionErrorType
 
-    constructor(name: string, message: string, type: ExecutionErrorType, public cause?: unknown) {
+    constructor(name: string, message: string, type: ExecutionErrorType, cause?: unknown) {
         super(message)
         this.name = name
         this.type = type
+        ;(this as Error & { cause?: unknown }).cause = cause
     }
 }
 

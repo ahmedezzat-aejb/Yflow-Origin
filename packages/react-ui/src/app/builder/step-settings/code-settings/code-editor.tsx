@@ -1,7 +1,8 @@
 import { javascript } from '@codemirror/lang-javascript';
 import { json } from '@codemirror/lang-json';
+import { EditorView } from '@codemirror/view';
 import { githubDark, githubLight } from '@uiw/codemirror-theme-github';
-import CodeMirror, { EditorState, EditorView } from '@uiw/react-codemirror';
+import CodeMirror, { EditorState } from '@uiw/react-codemirror';
 import { t } from 'i18next';
 import { Code, Package } from 'lucide-react';
 import { useRef, useState } from 'react';

@@ -61,7 +61,7 @@ const AITabContent = ({ operation }: { operation: PieceSelectorOperation }) => {
   };
 
   const metadata = stepUtils.mapPieceToMetadata({
-    piece: mockPieceModel,
+    piece: mockPieceModel as any,
     type: 'action',
   });
 
@@ -74,7 +74,7 @@ const AITabContent = ({ operation }: { operation: PieceSelectorOperation }) => {
   return (
     <div className="w-full">
       <AIPieceActionsList
-        stepMetadataWithSuggestions={pieceMetadataWithSuggestion}
+        stepMetadataWithSuggestions={pieceMetadataWithSuggestion as any}
         hidePieceIconAndDescription={false}
         operation={operation}
       />

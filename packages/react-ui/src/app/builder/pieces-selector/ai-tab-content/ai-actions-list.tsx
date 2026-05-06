@@ -1,7 +1,6 @@
 import { ApFlagId, FlowActionType, TelemetryEventName } from '@yflow/shared';
 import { t } from 'i18next';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 
 import { usePieceSearchContext } from '../../../../features/pieces/lib/piece-search-context';
@@ -45,24 +44,34 @@ export const AIPieceActionsList: React.FC<AIPieceActionsListProps> = ({
     state.handleAddingOrUpdatingStep,
   ]);
   const isAgentsConfigured = true; // Force AI actions to work for Community Edition
-  const navigate = useNavigate();
 
-  const aiActions = convertStepMetadataToPieceSelectorItems(
-    stepMetadataWithSuggestions,
-  );
+  // Create AI actions directly for Community Edition
+  const suggestedActions = (stepMetadataWithSuggestions as {
+    suggestedActions?: Array<{
+      name: string;
+      displayName: string;
+      description: string;
+    }>;
+  }).suggestedActions;
+
+  const aiActions =
+    suggestedActions?.map((action) => ({
+      actionOrTrigger: action,
+      type: FlowActionType.PIECE,
+      pieceMetadata: stepMetadataWithSuggestions,
+      displayName: action.displayName,
+      logoUrl: ACTION_ICON_MAP[action.name] || '/pieces/new-core/text-ai.svg',
+    })) || [];
 
   return (
     <ScrollArea className="h-full" viewPortClassName="h-full">
       <div className="grid grid-cols-3 p-2 gap-3 min-w-[350px]">
-        {aiActions.map((item, index) => {
-          const actionIcon =
-            item.type === FlowActionType.PIECE
-              ? ACTION_ICON_MAP[item.actionOrTrigger.name]
-              : 'https://cdn.activepieces.com/pieces/new-core/image-ai.svg';
+        {aiActions.map((item, index: number) => {
+          const actionIcon = item.logoUrl;
           return (
             <AIActionItem
               key={index}
-              item={item}
+              item={item as any}
               hidePieceIconAndDescription={hidePieceIconAndDescription}
               stepMetadataWithSuggestions={{
                 ...stepMetadataWithSuggestions,
@@ -81,7 +90,7 @@ export const AIPieceActionsList: React.FC<AIPieceActionsListProps> = ({
                   });
                 }
                 handleAddingOrUpdatingStep({
-                  pieceSelectorItem: item,
+                  pieceSelectorItem: item as any,
                   operation,
                   selectStepAfter: true,
                 });

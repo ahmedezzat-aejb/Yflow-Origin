@@ -12,7 +12,6 @@ import {
   TriggerPayload,
   TriggerStrategy,
 } from '@yflow/shared';
-import { LanguageModel, Tool } from 'ai'
 
 import {
   BasicAuthProperty,
@@ -24,6 +23,9 @@ import {
 } from '../property';
 import { PieceAuthProperty } from '../property/authentication';
 import { DelayPauseMetadata, PauseMetadata, WebhookPauseMetadata } from '@yflow/shared';
+
+type LanguageModel = unknown
+type Tool = unknown
 
 export type BaseContext<
   PieceAuth extends PieceAuthProperty | PieceAuthProperty[] | undefined,
