@@ -1,7 +1,7 @@
 import fs from 'fs/promises'
 import path from 'path'
 import { Action, Piece, PiecePropertyMap, Trigger } from '@yflow/pieces-framework'
-import { YflowError, EngineGenericError, ErrorCode, extractPieceFromModule, getPackageAliasForPiece, getPieceNameFromAlias, isNil, trimVersionFromAlias } from '@yflow/shared'
+import { EngineGenericError, ErrorCode, extractPieceFromModule, getPackageAliasForPiece, getPieceNameFromAlias, isNil, trimVersionFromAlias, yflowError } from '@yflow/shared'
 import { utils } from '../utils'
 
 export const pieceLoader = {
@@ -56,7 +56,7 @@ export const pieceLoader = {
         const pieceAction = piece.getAction(actionName)
 
         if (isNil(pieceAction)) {
-            throw new YflowError({
+            throw new yflowError({
                 code: ErrorCode.STEP_NOT_FOUND,
                 params: {
                     pieceName,
@@ -78,7 +78,7 @@ export const pieceLoader = {
         const actionOrTrigger = piece.getAction(actionOrTriggerName) ?? piece.getTrigger(actionOrTriggerName)
 
         if (isNil(actionOrTrigger)) {
-            throw new YflowError({
+            throw new yflowError({
                 code: ErrorCode.STEP_NOT_FOUND,
                 params: {
                     pieceName,
@@ -91,7 +91,7 @@ export const pieceLoader = {
         const property = (actionOrTrigger.props as PiecePropertyMap)[propertyName]
 
         if (isNil(property)) {
-            throw new YflowError({
+            throw new yflowError({
                 code: ErrorCode.CONFIG_NOT_FOUND,
                 params: {
                     pieceName,
@@ -117,8 +117,8 @@ export const pieceLoader = {
     },
 
     getPiecePath: async ({ packageName, devPieces }: GetPiecePathParams): Promise<string> => {
-        const piecePath = devPieces.includes(getPieceNameFromAlias(packageName)) 
-            ? await loadPieceFromDistFolder(packageName) 
+        const piecePath = devPieces.includes(getPieceNameFromAlias(packageName))
+            ? await loadPieceFromDistFolder(packageName)
             : await traverseAllParentFoldersToFindPiece(packageName)
         if (isNil(piecePath)) {
             throw new EngineGenericError('PieceNotFoundError', `Piece not found for package: ${packageName}`)

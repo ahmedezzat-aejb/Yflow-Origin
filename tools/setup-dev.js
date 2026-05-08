@@ -37,7 +37,7 @@ try {
 
 execSync('bun install', { stdio: 'inherit' });
 
-execSync('npx pnpm store add \
-  @tsconfig/node18@1.0.0 \
-  @types/node@18.17.1 \
-  typescript@4.8.4', { stdio: 'inherit' });
+// execSync('npx pnpm store add \
+//   @tsconfig/node18@1.0.0 \
+//   @types/node@18.17.1 \
+//   typescript@4.8.4', { stdio: 'inherit' });
