@@ -46,22 +46,15 @@ export const AIPieceActionsList: React.FC<AIPieceActionsListProps> = ({
   const isAgentsConfigured = true; // Force AI actions to work for Community Edition
 
   // Create AI actions directly for Community Edition
-  const suggestedActions = (stepMetadataWithSuggestions as {
-    suggestedActions?: Array<{
-      name: string;
-      displayName: string;
-      description: string;
-    }>;
-  }).suggestedActions;
+  const suggestedActions = stepMetadataWithSuggestions.suggestedActions || [];
 
-  const aiActions =
-    suggestedActions?.map((action) => ({
-      actionOrTrigger: action,
-      type: FlowActionType.PIECE,
-      pieceMetadata: stepMetadataWithSuggestions,
-      displayName: action.displayName,
-      logoUrl: ACTION_ICON_MAP[action.name] || '/pieces/new-core/text-ai.svg',
-    })) || [];
+  const aiActions = suggestedActions.map((action) => ({
+    actionOrTrigger: action,
+    type: FlowActionType.PIECE,
+    pieceMetadata: stepMetadataWithSuggestions,
+    displayName: action.displayName,
+    logoUrl: ACTION_ICON_MAP[action.name] || '/pieces/new-core/text-ai.svg',
+  }));
 
   return (
     <ScrollArea className="h-full" viewPortClassName="h-full">
